@@ -1,6 +1,8 @@
 package grupparbete.spring.springGA;
 
-import grupparbete.spring.springGA.persistance.UserEntity;
+import grupparbete.spring.springGA.Domain.AdminEntity;
+import grupparbete.spring.springGA.Domain.CustomerEntity;
+import grupparbete.spring.springGA.Domain.UserEntity;
 import grupparbete.spring.springGA.persistance.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,11 +19,11 @@ public class SpringGaApplication {
 	@Bean // get an object from Bean -- EmployeeRepository
 	public CommandLineRunner setUp(UserRepository userRepository){
 		return (args -> {
-			userRepository.save(new UserEntity("Kening", "Fohlin"));
-			userRepository.save(new UserEntity("Hanna","Fohlin"));
-			userRepository.save(new UserEntity("Andre","Fohlin"));
-			userRepository.save(new UserEntity("ABC","Fohlin"));
-			userRepository.save(new UserEntity("EFG","Fohlin"));
+			userRepository.save(new AdminEntity("Kening", "Fohlin"));
+			userRepository.save(new AdminEntity("Hanna","Fohlin"));
+			userRepository.save(new AdminEntity("Andre","Fohlin"));
+			userRepository.save(new CustomerEntity("ABC","firstname","lastname","djaogieo","asdfa","dasfa","ddd","heri"));
+			userRepository.save(new AdminEntity("EFG","Fohlin"));
 		});
 	}
 }

@@ -1,4 +1,4 @@
-package grupparbete.spring.springGA.persistance;
+package grupparbete.spring.springGA.Domain;
 
 import javax.persistence.Entity;
 import java.io.Serializable;

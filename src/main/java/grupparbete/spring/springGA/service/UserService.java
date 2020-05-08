@@ -1,6 +1,6 @@
 package grupparbete.spring.springGA.service;
 
-import grupparbete.spring.springGA.persistance.UserEntity;
+import grupparbete.spring.springGA.Domain.UserEntity;
 import grupparbete.spring.springGA.persistance.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

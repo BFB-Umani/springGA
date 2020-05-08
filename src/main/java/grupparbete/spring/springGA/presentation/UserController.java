@@ -1,6 +1,6 @@
 package grupparbete.spring.springGA.presentation;
 
-import grupparbete.spring.springGA.persistance.UserEntity;
+import grupparbete.spring.springGA.Domain.UserEntity;
 import grupparbete.spring.springGA.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
