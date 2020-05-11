@@ -1,26 +1,6 @@
-package grupparbete.spring.springGA.Domain;
+package grupparbete.spring.springGA.request;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
-@RequiredArgsConstructor
-@Getter
-@ToString
-@EqualsAndHashCode(callSuper = false)
-@Entity(name = "customers")
-public class CustomerEntity implements Serializable {
-
-//   @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "customerEntity")
-//    private List<PurchaseEntity> purchaseList;
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class UserDetailsRequestModel {
     private String userName;
     private String password;
     private String firstName; //inga siffror/konstiga tecken, minst 2 bokstäver max 40
@@ -30,37 +10,7 @@ public class CustomerEntity implements Serializable {
     private String country; // not null
     private String email; //behöver snabelA ("@")
     private String zipCode; //felhantering för input av bokstäver (får enbart innehålla siffror och max 5 tecken)
-//    private boolean premiumCustomer = false;
-//    private long totalAmountSpent;
 
-    public CustomerEntity(String password, String firstName, String lastName, String address, String city, String country, String email, String zipCode) {
-        this.userName=email;
-        this.password=password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.country = country;
-        this.email = email;
-        this.zipCode = zipCode;
-//        this.totalAmountSpent = 0;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -116,5 +66,21 @@ public class CustomerEntity implements Serializable {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
