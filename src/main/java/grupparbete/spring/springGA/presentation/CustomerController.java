@@ -1,21 +1,19 @@
 package grupparbete.spring.springGA.presentation;
 
 import grupparbete.spring.springGA.Domain.CustomerEntity;
-import grupparbete.spring.springGA.persistance.CustomerRepository;
 import grupparbete.spring.springGA.request.UserDetailsRequestModel;
 import grupparbete.spring.springGA.service.CustomerService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-@RestController
+
+@Controller
 @RequestMapping("customers")
 public class CustomerController {
 
@@ -23,16 +21,34 @@ public class CustomerController {
 
 
     @Autowired
-    public CustomerController(CustomerService customerService){
+    public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
 
-    public List<CustomerEntity> getAllCustomers(){
-        return customerService.getAllCustomers();
+    @GetMapping("/all")
+    public String getAllCustomers(Model theModel) {
+        theModel.addAttribute("theCustomers", customerService.getAllCustomers());
+        return "showCustomers";
     }
 
-    public Optional<CustomerEntity> getACustomer(long id){
-        return customerService.getACustomer(id);
+    @GetMapping("/{id}")
+    public String getACustomer(Model theModel, @PathVariable long id) {
+        List<CustomerEntity> customersList = new ArrayList<>();
+        if (customerService.getACustomer(id).isPresent()) { // check if Optional<> is null
+            customersList.add(customerService.getACustomer(id).get()); // get() -- if not null, get customerEntity object
+        } else {
+            return "errorMessage";
+        }
+        theModel.addAttribute("theCustomers", customersList);
+
+        return "showCustomers";
+    }
+
+    @GetMapping
+    public String sayHello(Model theModel) {
+        theModel.addAttribute("theDate", new java.util.Date());
+        return "helloworld";
+
     }
 
     @PostMapping(

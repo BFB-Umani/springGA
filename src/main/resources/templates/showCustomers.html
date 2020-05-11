@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Thymeleaf Demo</title>
+</head>
+
+<body>
+
+<p th:text="'All customers are here: '"/>
+<table>
+    <tr th:each="customer: ${theCustomers}">
+        <td th:text="${customer.id}" />
+        <td th:text="${customer.userName}" />
+        <td th:text="${customer.password}" />
+        <td th:text="${customer.firstName}" />
+        <td th:text="${customer.lastName}" />
+        <td th:text="${customer.address}" />
+        <td th:text="${customer.city}" />
+        <td th:text="${customer.country}" />
+        <td th:text="${customer.email}" />
+        <td th:text="${customer.zipCode}" />
+    </tr>
+
+</table>
+
+</body>
+
+</html>
+
+
+
