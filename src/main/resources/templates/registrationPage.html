@@ -7,6 +7,24 @@
 
 <body>
 <h1>Registration Page</h1>
+<form action="#" th:action="@{/customers/save}"
+      th:object="${customer}" method="POST">
+    <input type="text" th:field="*{firstName}" placeholder="First name">
+    <input type="text" th:field="*{lastName}" placeholder="lastName">
+    <input type="text" th:field="*{email}" placeholder="email">
+    <input type="text" th:field="*{address}" placeholder="address">
+    <input type="text" th:field="*{city}" placeholder="city">
+    <input type="text" th:field="*{zipCode}" placeholder="zipCode">
+    <input type="text" th:field="*{country}" placeholder="country">
+    <input type="text" th:field="*{userName}" placeholder="userName">
+    <input type="text" th:field="*{password}" placeholder="password">
+
+    <button type="submit">Save</button>
+
+</form>
+
+<hr>
+<a th:href="@{/login}">Back to login page</a>
 
 
 </body>

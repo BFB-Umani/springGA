@@ -70,4 +70,8 @@ return result;
     public void setCurrentCustomerEntity(CustomerEntity currentCustomerEntity) {
         this.currentCustomerEntity = currentCustomerEntity;
     }
+
+    public void save(CustomerEntity customerEntity) {
+        customerRepository.save(customerEntity);
+    }
 }

@@ -50,4 +50,11 @@ public class CustomerController {
         return returnValue;
     }
 
+    @PostMapping("/save")
+    public String saveACustomer(@ModelAttribute("customer") CustomerEntity customerEntity){
+        customerService.save(customerEntity);
+        return "redirect:/login";
+
+    }
+
 }
