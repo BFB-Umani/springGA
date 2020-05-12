@@ -7,16 +7,15 @@ import grupparbete.spring.springGA.service.CustomerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("customers")
+@Controller
+@RequestMapping("/customers")
 public class CustomerController {
 
     private CustomerService customerService;
@@ -34,6 +33,12 @@ public class CustomerController {
     public Optional<CustomerEntity> getACustomer(long id){
         return customerService.getACustomer(id);
     }
+
+    @GetMapping
+    public String goToCustomersPage(){
+        return "customerPage";
+    }
+
 
     @PostMapping(
             consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},

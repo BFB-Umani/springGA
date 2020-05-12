@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Web shop</title>
+</head>
+
+<body>
+<form action="login.html">
+    <label>First name: </label>
+    <input type="text" name="username" placeholder="username"><br>
+    <label>Password: </label>
+    <input type="password" name="password" placeholder="password"><br>
+
+    <a th:href="@{/customers}" type="submit" class="btn btn-success">Login</a><br>
+    <a th:href="@{/registration}" type="submit" class="btn btn-success">Register</a>
+
+</form>
+
+
+</body>
+
+</html>
