@@ -1,6 +1,5 @@
 package grupparbete.spring.springGA.Domain;
 
-import grupparbete.spring.springGA.Domain.BrandEntity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +25,44 @@ public class ChipsEntity implements Serializable {
     private long price;
     //private String displayPrice;
     private String image;
+    private String brand;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = PERSIST)
-    private BrandEntity brandEntity;
+    public ChipsEntity(String name, long price, String image, String brand) {
+    this.name=name;
+    this.price=price;
+    this.image=image;
+    this.brand=brand;
+    }
 
-    public ChipsEntity(BrandEntity brand, String flavor, long price) {
-        this.brandEntity = brand;
-        this.name = flavor;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
         this.price = price;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 }

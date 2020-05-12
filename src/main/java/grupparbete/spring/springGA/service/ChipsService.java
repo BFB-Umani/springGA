@@ -4,6 +4,7 @@ import grupparbete.spring.springGA.Domain.ChipsEntity;
 import grupparbete.spring.springGA.persistance.ChipsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,15 +14,15 @@ public class ChipsService {
     private ChipsRepository chipsRepository;
 
     @Autowired
-    public ChipsService(ChipsRepository chipsRepository){
+    public ChipsService(ChipsRepository chipsRepository) {
         this.chipsRepository = chipsRepository;
     }
 
-    public List<ChipsEntity> getAllChips(){
+    public List<ChipsEntity> getAllChips() {
         return chipsRepository.findAll();
     }
 
-    public Optional<ChipsEntity> getAChips(long id){
+    public Optional<ChipsEntity> getAChips(long id) {
         return chipsRepository.findById(id);
     }
 
@@ -36,6 +37,11 @@ public class ChipsService {
 //        return q.getResultList();
 //    }
 
-
+    public List<ChipsEntity> search(String searchWord) {
+        List<ChipsEntity> resultList1 = chipsRepository.findByBrandContainingIgnoreCase(searchWord);
+        List<ChipsEntity> resultList2 = chipsRepository.findByNameContainingIgnoreCase(searchWord);
+        resultList1.addAll(resultList2);
+        return resultList1;
+    }
 
 }

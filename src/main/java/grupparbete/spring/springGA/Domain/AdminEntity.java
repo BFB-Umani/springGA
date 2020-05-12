@@ -11,7 +11,7 @@ public class AdminEntity implements Serializable {
     @GeneratedValue
     private Long id;
 
-    private String userName;
+    private String email;
     private String password;
 
     public AdminEntity() {
@@ -20,7 +20,7 @@ public class AdminEntity implements Serializable {
     }
 
     public AdminEntity(String userName, String password) {
-        this.userName = userName;
+        this.email = userName;
         this.password = password;
     }
 
@@ -33,4 +33,20 @@ public class AdminEntity implements Serializable {
     public boolean isCustomer() {
         return false;
     }*/
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String userName) {
+        this.email = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -13,22 +13,25 @@ import java.util.Optional;
 public class ChipsController {
 
     private ChipsService chipsService;
+
     @Autowired
-    public ChipsController (ChipsService chipsService){
+    public ChipsController(ChipsService chipsService) {
         this.chipsService = chipsService;
     }
+
     @GetMapping
-    public List<ChipsEntity> getAllChips(){
+    public List<ChipsEntity> getAllChips() {
         return chipsService.getAllChips();
     }
+
     @GetMapping("/{id}")
-    public Optional<ChipsEntity> getAChips(long id){
+    public Optional<ChipsEntity> getAChips(long id) {
         return chipsService.getAChips(id);
     }
 
 
     @PostMapping("/book/add")
-    public ChipsEntity addAChips(@RequestBody ChipsEntity chipsEntity){
+    public ChipsEntity addAChips(@RequestBody ChipsEntity chipsEntity) {
 
         chipsService.addChips(chipsEntity);
 
@@ -36,5 +39,9 @@ public class ChipsController {
 
     }
 
+    @GetMapping("/search/{searchWord}")
+    public List<ChipsEntity> searchForChips(@PathVariable String searchWord) {
+        return chipsService.search(searchWord);
+    }
 
 }

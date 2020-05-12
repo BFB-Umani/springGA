@@ -1,9 +1,6 @@
 package grupparbete.spring.springGA.Domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -45,6 +42,7 @@ public class CustomerEntity implements Serializable {
         this.zipCode = zipCode;
 //        this.totalAmountSpent = 0;
     }
+
 
     public String getUserName() {
         return userName;
