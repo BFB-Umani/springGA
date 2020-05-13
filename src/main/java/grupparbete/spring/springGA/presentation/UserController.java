@@ -7,10 +7,8 @@ import grupparbete.spring.springGA.service.AdminService;
 import grupparbete.spring.springGA.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -58,5 +56,6 @@ public class UserController {
             return "errorlogin";
         }
     }
+
 }
 
