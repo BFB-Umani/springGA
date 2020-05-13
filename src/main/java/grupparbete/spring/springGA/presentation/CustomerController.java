@@ -3,6 +3,7 @@ package grupparbete.spring.springGA.presentation;
 import grupparbete.spring.springGA.Domain.CustomerEntity;
 import grupparbete.spring.springGA.persistance.CustomerRepository;
 import grupparbete.spring.springGA.request.UserDetailsRequestModel;
+import grupparbete.spring.springGA.request.UserLoginRequestModel;
 import grupparbete.spring.springGA.service.CustomerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,14 @@ public class CustomerController {
         customerService.save(customerEntity);
         return "redirect:/login";
 
+    }
+    @GetMapping("/logout")
+    public String logOut(Model model){
+        UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel();
+        model.addAttribute("userlogin",userLoginRequestModel);
+        customerService.setCurrentCustomerEntity(null);
+        //empty shoppingcart
+        return "login";
     }
 
 }
