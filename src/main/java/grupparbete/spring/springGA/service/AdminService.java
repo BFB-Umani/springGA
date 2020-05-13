@@ -17,8 +17,8 @@ public class AdminService {
         this.adminRepository = adminRepository;
     }
 
-    public String loadUserByUsername(UserLoginRequestModel userLoginRequestModel) {
-        String result="";
+    public String loadUserByEmail(UserLoginRequestModel userLoginRequestModel) {
+        String result="fail";
         try{
             AdminEntity adminEntity = adminRepository.findByEmail(userLoginRequestModel.getEmail());
             if (adminEntity.getPassword().equals(userLoginRequestModel.getPassword())){

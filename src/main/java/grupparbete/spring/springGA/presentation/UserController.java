@@ -7,16 +7,15 @@ import grupparbete.spring.springGA.service.AdminService;
 import grupparbete.spring.springGA.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("users")
+
+@Controller
+@RequestMapping("/users")
 public class UserController {
 
 
@@ -49,11 +48,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody UserLoginRequestModel userLoginRequestModel) {
-        if (customerService.loadUserByUsername(userLoginRequestModel) != "fail") {
-            return "customerlogin";
-        } else if (adminService.loadUserByUsername(userLoginRequestModel) != "fail") {
-            return "adminlogin";
+    public String login(@ModelAttribute("userlogin") UserLoginRequestModel userLoginRequestModel) { // @RequestBody???
+        if (customerService.loadUserByEmail(userLoginRequestModel) != "fail") {
+            return "customerPage";
+        } else if (adminService.loadUserByEmail(userLoginRequestModel) != "fail") {
+            return "adminPage";
         } else {
             return "errorlogin";
         }

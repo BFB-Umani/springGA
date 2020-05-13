@@ -48,8 +48,8 @@ public class CustomerService {
 
 //    TODO: fix NullPointerException
 
-    public String loadUserByUsername(UserLoginRequestModel userLoginRequestModel) {
-        String result = "";
+    public String loadUserByEmail(UserLoginRequestModel userLoginRequestModel) { //changed from loadUserByUserName
+        String result = "fail";
         try{
             CustomerEntity customerEntity = customerRepository.findByEmail(userLoginRequestModel.getEmail());
             if (customerEntity.getPassword().equals(userLoginRequestModel.getPassword())){

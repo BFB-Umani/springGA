@@ -1,8 +1,11 @@
 package grupparbete.spring.springGA.request;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class UserLoginRequestModel {
 
-    private String email;
+    private String email; //username????
     private String password;
 
     public String getEmail() {

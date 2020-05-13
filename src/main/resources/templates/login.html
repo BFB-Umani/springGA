@@ -2,19 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Web shop</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 </head>
 
 <body>
 
 
-<form action="#">
-    <label>First name: </label>
-    <input type="text" name="username" placeholder="username"><br>
+<form action="#" th:action="@{/users/login}"
+      th:object="${userlogin}" method="POST">
+    <label>Email: </label>
+    <input type="text" th:field="*{email}" placeholder="Email"><br>
     <label>Password: </label>
-    <input type="password" name="password" placeholder="password"><br>
+    <input type="password" th:field="*{password}" placeholder="password"><br>
 
-    <a th:href="@{/customers}" type="submit" class="btn btn-success">Login</a><br>
+    <button type="submit" class="btn btn-success">Login</button>
+    <br>
     <a th:href="@{/registration}" class="btn btn-success">Register</a>
 
 </form>
