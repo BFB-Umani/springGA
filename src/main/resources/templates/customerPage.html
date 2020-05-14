@@ -11,6 +11,28 @@
 <body>
 <h1>Customer Page</h1>
 <a th:href="@{/login}" class="btn btn-success">Log out</a>
+<br>
+<hr>
+
+<table>
+    <thead>Chips
+    <tr>
+        <th>Brand</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="chips: ${allChips}">
+        <td th:text="${chips.getBrand()}"></td>
+        <td th:text="${chips.getImage()}"></td>
+        <td th:text="${chips.getName()}"></td>
+        <td th:text="${chips.getPrice()}"></td>
+    </tr>
+    </tbody>
+</table>
 
 
 </body>

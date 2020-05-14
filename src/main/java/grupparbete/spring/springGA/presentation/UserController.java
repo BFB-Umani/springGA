@@ -52,7 +52,7 @@ public class UserController {
     @PostMapping("/login")
     public String login(@ModelAttribute("userlogin") UserLoginRequestModel userLoginRequestModel) { // @RequestBody???
         if (customerService.loadUserByEmail(userLoginRequestModel) != "fail") {
-            return "customerPage";
+            return "redirect:/chips/list";
         } else if (adminService.loadUserByEmail(userLoginRequestModel) != "fail") {
             return "redirect:/adminPage/list";
         } else {
