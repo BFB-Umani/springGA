@@ -1,8 +1,10 @@
 package grupparbete.spring.springGA.presentation;
 
+import grupparbete.spring.springGA.Domain.ChipsEntity;
 import grupparbete.spring.springGA.Domain.CustomerEntity;
 import grupparbete.spring.springGA.Domain.PurchaseEntity;
 import grupparbete.spring.springGA.service.AdminService;
+import grupparbete.spring.springGA.service.ChipsService;
 import grupparbete.spring.springGA.service.CustomerService;
 import grupparbete.spring.springGA.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +25,14 @@ public class AdminController {
     CustomerService customerService;
     AdminService adminService;
     PurchaseService purchaseService;
+    ChipsService chipsService;
 
     @Autowired
-    public AdminController(CustomerService customerService, AdminService adminService, PurchaseService purchaseService) {
+    public AdminController(CustomerService customerService, AdminService adminService, PurchaseService purchaseService, ChipsService chipsService) {
         this.customerService = customerService;
         this.adminService = adminService;
         this.purchaseService = purchaseService;
+        this.chipsService = chipsService;
     }
 
     @GetMapping("/list")
@@ -45,8 +49,12 @@ public class AdminController {
 //        return "purchases";
 //    }
 
-    @GetMapping("/purchaseInfo")
-    public String goToPurchaseInfo(){
+    @GetMapping("/purchaseInfo/{id}")
+    public String goToPurchaseInfo(@PathVariable long id, Model model){
+        CustomerEntity customerEntity = purchaseService.getCustomerByPurchaseID(id);
+        List<ChipsEntity> chipsEntityList = getChipsByPurchaseID(id);
+        model.addAttribute("customer", customerEntity);
+        model.addAttribute("chips", chipsEntityList);
         return "purchaseInfo";
     }
 
@@ -57,6 +65,10 @@ public class AdminController {
         model.addAttribute("purchases", purchaseEntityList);
         model.addAttribute("chosencustomer",customerEntity);
         return "purchases";
+    }
+
+    public List<ChipsEntity> getChipsByPurchaseID(long id) {
+        return purchaseService.getChipsByPurchaseID(id);
     }
 
     public List<PurchaseEntity> getPurchasesByCustomerID(long id){

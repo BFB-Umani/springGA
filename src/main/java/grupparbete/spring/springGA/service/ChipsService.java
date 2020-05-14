@@ -1,6 +1,7 @@
 package grupparbete.spring.springGA.service;
 
 import grupparbete.spring.springGA.Domain.ChipsEntity;
+import grupparbete.spring.springGA.Domain.PurchaseEntity;
 import grupparbete.spring.springGA.persistance.ChipsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,4 @@ public class ChipsService {
         resultList1.addAll(resultList2);
         return resultList1;
     }
-
 }

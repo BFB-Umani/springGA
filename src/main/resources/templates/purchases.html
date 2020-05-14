@@ -25,14 +25,14 @@
         </tr>
         <tr th:each="purchase: ${purchases}">
             <td><span th:text="${purchase.id}">Purchase ID</span></td>
-            <td><span th:text="${purchase.dateofPurchase}">Purchase Date</span></td>
+            <td><span th:text="${purchase.dateOfPurchase}">Purchase Date</span></td>
 
 
 
 
 
             <td>
-                <form action="#" th:action="@{/adminPage/purchaseInfo}">
+                <form action="#" th:action="@{'/adminPage/purchaseInfo/' + ${purchase.id}}">
                     <button type="submit" class="btn btn-info">Go to PurchaseInfo</button>
                 </form>
             </td>

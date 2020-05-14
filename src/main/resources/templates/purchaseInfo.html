@@ -17,15 +17,19 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:if="4==5">
-        <td colspan="4">No customers in database</td>
+    <tr th:if="${chips.isEmpty()}">
+        <td colspan="4">No chips purchase in database</td>
     </tr>
-    <tr>
-
+    <tr th:each="chipsObject : ${chips}">
+        <td><img th:src="@{'/images/' + ${chipsObject.image}}"></td>
+        <td><span th:text="${chipsObject.name}">Name</span></td>
+        <td><span th:text="${chipsObject.price}">Price</span></td>
     </tr>
 
     </tbody>
 </table>
-
+<form action="#" th:action="@{'/adminPage/purchases/' + ${customer.id}}">
+    <button type="submit" class="btn btn-info">BACK</button>
+</form>
 </body>
 </html>

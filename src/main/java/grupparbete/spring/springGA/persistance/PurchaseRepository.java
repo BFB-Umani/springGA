@@ -1,5 +1,6 @@
 package grupparbete.spring.springGA.persistance;
 
+import grupparbete.spring.springGA.Domain.ChipsEntity;
 import grupparbete.spring.springGA.Domain.CustomerEntity;
 import grupparbete.spring.springGA.Domain.PurchaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,5 +11,7 @@ import java.util.List;
 @Repository
 public interface PurchaseRepository extends JpaRepository<PurchaseEntity,Long> {
 
-    List<PurchaseEntity> findByCustomerEntity_Id(Long customerEntity_id);
+    List<PurchaseEntity> findByCustomerEntityId(Long customerEntityId);
+
+    PurchaseEntity findPurchaseById(long id);
 }

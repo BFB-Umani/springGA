@@ -34,6 +34,10 @@ public class ChipsEntity implements Serializable {
     this.brand=brand;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }

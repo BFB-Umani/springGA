@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-@RequiredArgsConstructor
+
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = false)
