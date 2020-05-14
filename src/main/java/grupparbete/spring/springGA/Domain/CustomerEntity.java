@@ -115,4 +115,8 @@ public class CustomerEntity implements Serializable {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

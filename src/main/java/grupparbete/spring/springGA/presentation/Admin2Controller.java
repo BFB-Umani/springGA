@@ -4,6 +4,7 @@ import grupparbete.spring.springGA.Domain.CustomerEntity;
 import grupparbete.spring.springGA.Domain.PurchaseEntity;
 import grupparbete.spring.springGA.service.AdminService;
 import grupparbete.spring.springGA.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class Admin2Controller {
     CustomerService customerService;
     AdminService adminService;
 
+    @Autowired
     public Admin2Controller(CustomerService customerService, AdminService adminService) {
         this.customerService = customerService;
         this.adminService = adminService;
@@ -36,5 +38,10 @@ public class Admin2Controller {
     @GetMapping("/purchases")
     public String goToPurchases(){
         return "purchases";
+    }
+
+    @GetMapping("/purchaseInfo")
+    public String goToPurchaseInfo(){
+        return "purchaseInfo";
     }
 }
