@@ -31,9 +31,6 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
-    public Optional<CustomerEntity> getACustomer(long id){
-        return customerService.getACustomer(id);
-    }
 
     @GetMapping
     public String goToCustomersPage(){

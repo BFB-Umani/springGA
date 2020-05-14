@@ -3,13 +3,14 @@ package grupparbete.spring.springGA.presentation;
 import grupparbete.spring.springGA.Domain.PurchaseEntity;
 import grupparbete.spring.springGA.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("purchases")
 public class PurchaseController {
 
@@ -24,7 +25,9 @@ public class PurchaseController {
         return purchaseService.getAllPurchases();
     }
 
-    public Optional<PurchaseEntity> getAPurchase(long id){
-        return purchaseService.getAPurchase(id);
-    }
+//    public Optional<PurchaseEntity> getAPurchase(long id){
+//        return purchaseService.getAPurchase(id);
+//    }
+
+
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("chips")
@@ -24,10 +23,10 @@ public class ChipsController {
         return chipsService.getAllChips();
     }
 
-    @GetMapping("/{id}")
-    public Optional<ChipsEntity> getAChips(long id) {
-        return chipsService.getAChips(id);
-    }
+//    @GetMapping("/{id}")
+//    public Optional<ChipsEntity> getAChips(long id) {
+//        return chipsService.getAChips(id);
+//    }
 
 
     @PostMapping("/book/add")

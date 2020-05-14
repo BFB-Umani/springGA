@@ -2,6 +2,7 @@ package grupparbete.spring.springGA.service;
 
 import grupparbete.spring.springGA.Domain.ChipsEntity;
 import grupparbete.spring.springGA.Domain.CustomerEntity;
+import grupparbete.spring.springGA.Domain.PurchaseEntity;
 import grupparbete.spring.springGA.persistance.CustomerRepository;
 import grupparbete.spring.springGA.request.UserDetailsRequestModel;
 import grupparbete.spring.springGA.request.UserLoginRequestModel;
@@ -27,7 +28,9 @@ public class CustomerService {
     public List<CustomerEntity> getAllCustomers(){
         return customerRepository.findAll();
     }
-    public Optional<CustomerEntity> getACustomer(long id){
+
+
+    public CustomerEntity getCustomerById(long id){
         return customerRepository.findById(id);
     }
 
@@ -74,4 +77,5 @@ return result;
     public void save(CustomerEntity customerEntity) {
         customerRepository.save(customerEntity);
     }
+
 }
