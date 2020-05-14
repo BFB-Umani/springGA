@@ -18,7 +18,6 @@ public class CustomerEntity implements Serializable {
     @GeneratedValue
     private Long id;
 
-    private String userName;
     private String password;
     private String firstName; //inga siffror/konstiga tecken, minst 2 bokstäver max 40
     private String lastName; //inga siffror/konstiga tecken, minst 2 bokstäver max 40
@@ -31,7 +30,6 @@ public class CustomerEntity implements Serializable {
 //    private long totalAmountSpent;
 
     public CustomerEntity(String password, String firstName, String lastName, String address, String city, String country, String email, String zipCode) {
-        this.userName=email;
         this.password=password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -43,13 +41,8 @@ public class CustomerEntity implements Serializable {
 //        this.totalAmountSpent = 0;
     }
 
+    public CustomerEntity() {
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getPassword() {

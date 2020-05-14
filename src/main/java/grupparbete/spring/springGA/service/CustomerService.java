@@ -49,8 +49,6 @@ public class CustomerService {
         return "User created";
     }
 
-//    TODO: fix NullPointerException
-
     public String loadUserByEmail(UserLoginRequestModel userLoginRequestModel) { //changed from loadUserByUserName
         String result = "fail";
         try{
