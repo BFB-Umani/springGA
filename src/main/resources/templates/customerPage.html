@@ -10,12 +10,26 @@
 
 <body>
 <h1>Customer Page</h1>
-<a th:href="@{/login}" class="btn btn-success">Log out</a>
-<br>
-<hr>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <a th:href="@{/customers/logout}" class="btn btn-success">Log out</a>
+        </div>
+        <div class="col">
+            <a th:href="@{/}" class="btn btn-success">Cart</a>
+            <input type="text"> <button type="submit" class="btn btn-success">Search</button>
+        </div>
+        <div class="col">
+            <a th:href="@{/checkout}" class="btn btn-success">Check Out</a>
+        </div>
+    </div>
 
-<table>
-    <thead>Chips
+
+</div>
+
+
+<table class="table table-hover">
+    <thead>
     <tr>
         <th>Brand</th>
         <th>Image</th>
@@ -27,7 +41,7 @@
     <tbody>
     <tr th:each="chips: ${allChips}">
         <td th:text="${chips.getBrand()}"></td>
-        <td th:text="${chips.getImage()}"></td>
+        <td><img th:src="'/images/' + ${chips.getImage()}"></td>
         <td th:text="${chips.getName()}"></td>
         <td th:text="${chips.getPrice()}"></td>
     </tr>

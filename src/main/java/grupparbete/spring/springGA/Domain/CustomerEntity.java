@@ -41,9 +41,6 @@ public class CustomerEntity implements Serializable {
 //        this.totalAmountSpent = 0;
     }
 
-    public CustomerEntity() {
-
-    }
 
     public String getPassword() {
         return password;
