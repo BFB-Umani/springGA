@@ -9,18 +9,27 @@
 <body>
 
 <table class="table table-hover">
+
+    <h3><span>Purchases for customer </span><br/> <span th:text="${chosencustomer.firstName}"></span> <span> </span> <span th:text="${chosencustomer.lastName}"></span></h3>
     <thead>
         <tr>
-            <th>purchase ID</th>
-            <th>purchase cost</th>
-            <th>purchase info</th>
+            <th>Purchase ID</th>
+            <th>Purchase Date</th>
+            <th>Purchase Cost</th>
+            <th>Purchase Info</th>
         </tr>
     </thead>
     <tbody>
-        <tr th:if="4==5">
-            <td colspan="4">No customers in database</td>
+        <tr th:if="${purchases.isEmpty()}">
+            <td colspan="4">No purchases in database</td>
         </tr>
-        <tr>
+        <tr th:each="purchase: ${purchases}">
+            <td><span th:text="${purchase.id}">Purchase ID</span></td>
+            <td><span th:text="${purchase.dateofPurchase}">Purchase Date</span></td>
+
+
+
+
 
             <td>
                 <form action="#" th:action="@{/adminPage/purchaseInfo}">
@@ -32,6 +41,8 @@
 
     </tbody>
 </table>
-
+<form action="#" th:action="@{/adminPage/list}">
+    <button type="submit" class="btn btn-info">BACK</button>
+</form>
 </body>
 </html>

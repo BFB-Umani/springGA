@@ -5,6 +5,7 @@ import grupparbete.spring.springGA.request.UserDetailsRequestModel;
 import grupparbete.spring.springGA.request.UserLoginRequestModel;
 import grupparbete.spring.springGA.service.AdminService;
 import grupparbete.spring.springGA.service.CustomerService;
+import grupparbete.spring.springGA.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -35,9 +36,9 @@ public class UserController {
         return customerService.getAllCustomers();
     }
 
-    public Optional<CustomerEntity> getACustomer(long id) {
-        return customerService.getACustomer(id);
-    }
+//    public Optional<CustomerEntity> getACustomer(long id) {
+//        return customerService.getACustomer(id);
+//    }
 
     @PostMapping(
             consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE},

@@ -27,10 +27,11 @@
         <td><span th:text="${customer.email}">Email</span></td>
 
         <td>
-            <form action="#" th:action="@{/adminPage/purchases}">
+            <form action="#" th:action="@{'/adminPage/purchases/' + ${customer.id}}">
                 <button type="submit" class="btn btn-info">Go to Purchases</button>
             </form>
         </td>
+
 
 
     </tr>

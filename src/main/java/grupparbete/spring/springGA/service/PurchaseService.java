@@ -22,9 +22,11 @@ public class PurchaseService {
         return  purchaseRepository.findAll();
     }
 
-    public Optional<PurchaseEntity> getAPurchase(long id){
-        return purchaseRepository.findById(id);
-    }
+//    public Optional<PurchaseEntity> getAPurchase(long id){
+//        return purchaseRepository.findById(id);
+//    }
 
-    
+    public List<PurchaseEntity> getPurchasesByCustomerID(long id){
+        return purchaseRepository.findByCustomerEntity_Id(id);
+    }
 }
