@@ -58,12 +58,10 @@ public class CustomerController {
 
     }
     @GetMapping("/logout")
-    public String logOut(Model model){
-        UserLoginRequestModel userLoginRequestModel = new UserLoginRequestModel();
-        model.addAttribute("userlogin",userLoginRequestModel);
+    public String logOut(){
         customerService.setCurrentCustomerEntity(null);
         //empty shoppingcart
-        return "login";
+        return "redirect:/login";
     }
 
 }

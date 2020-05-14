@@ -54,7 +54,7 @@ public class UserController {
         if (customerService.loadUserByEmail(userLoginRequestModel) != "fail") {
             return "customerPage";
         } else if (adminService.loadUserByEmail(userLoginRequestModel) != "fail") {
-            return "adminPage";
+            return "redirect:/adminPage/list";
         } else {
             return "errorlogin";
         }
