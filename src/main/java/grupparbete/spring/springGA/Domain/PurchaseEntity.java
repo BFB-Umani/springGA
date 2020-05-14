@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @RequiredArgsConstructor
 @Getter
@@ -26,4 +27,21 @@ public class PurchaseEntity implements Serializable {
 
     private boolean applyDiscount = false;
 
+    private Date dateofPurchase;
+
+    public boolean isApplyDiscount() {
+        return applyDiscount;
+    }
+
+    public void setApplyDiscount(boolean applyDiscount) {
+        this.applyDiscount = applyDiscount;
+    }
+
+    public Date getDateofPurchase() {
+        return dateofPurchase;
+    }
+
+    public void setDateofPurchase(Date dateofPurchase) {
+        this.dateofPurchase = dateofPurchase;
+    }
 }

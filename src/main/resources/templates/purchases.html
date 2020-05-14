@@ -13,9 +13,10 @@
     <h3><span>Purchases for customer </span><br/> <span th:text="${chosencustomer.firstName}"></span> <span> </span> <span th:text="${chosencustomer.lastName}"></span></h3>
     <thead>
         <tr>
-            <th>purchase ID</th>
-            <th>purchase cost</th>
-            <th>purchase info</th>
+            <th>Purchase ID</th>
+            <th>Purchase Date</th>
+            <th>Purchase Cost</th>
+            <th>Purchase Info</th>
         </tr>
     </thead>
     <tbody>
@@ -23,7 +24,9 @@
             <td colspan="4">No purchases in database</td>
         </tr>
         <tr th:each="purchase: ${purchases}">
-            <td><span th:text="${purchase.id}">purchase ID</span></td>
+            <td><span th:text="${purchase.id}">Purchase ID</span></td>
+            <td><span th:text="${purchase.dateofPurchase}">Purchase Date</span></td>
+
 
 
 
