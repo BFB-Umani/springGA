@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
 
     <ul class="navbar-nav ml-auto">
         <li class="nav-item mx-4">
-            <form  action="#" th:action="@{chips/search}" method="get">
+            <form action="#" th:action="@{chips/search}" method="get">
                 <input type="text" name="search" id="search" class=""/>
                 <input type="submit" value="Search" class="btn btn-outline-success my-2 my-sm-0"/>
             </form>
@@ -40,13 +41,11 @@
 </div>
 
 
-
-
 <table class="table table-hover">
     <thead>
     <tr>
+        <th></th>
         <th>Brand</th>
-        <th>Image</th>
         <th>Name</th>
         <th>Price</th>
     </tr>
@@ -54,22 +53,38 @@
 
     <tbody>
     <tr th:each="chips: ${allChips}">
-        <td th:text="${chips.getBrand()}"></td>
         <td>
             <a th:id="${chips.id}" onclick="getId(this.id)">
                 <img th:src="'/images/' + ${chips.getImage()}" class="thumbnails">
             </a>
         </td>
+        <td th:text="${chips.getBrand()}"></td>
         <td th:text="${chips.getName()}"></td>
         <td th:text="${chips.getPrice()}"></td>
+        <td>
+            <button type="button" class="btn btn-success">Add to cart</button>
+        </td>
     </tr>
     </tbody>
 </table>
 
 <div class="cartSection">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img src="https://img.icons8.com/material-rounded/48/000000/shopping-cart.png"/>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <span>0 Items</span>
+                </div>
+                <div class="row">
+                    <span>0 SEK</span>
+                </div>
+            </div>
+        </div>
 
-    <div><img src="https://img.icons8.com/material-rounded/48/000000/shopping-cart.png"/></div>
-
+    </div>
 </div>
 
 <!-- The Modal -->
@@ -122,16 +137,19 @@
 
         modal.style.display = "block";
         let span = document.getElementsByClassName("close")[0];
-        span.onclick = function() {   modal.style.display = "none"; }
-        window.onclick = function(event) {
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+        window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
-            } }
+            }
+        }
     }
 
     function findObjectByKey(array, key, value) {
         for (let i = 0; i < array.length; i++) {
-            if(array[i][key] == value) {
+            if (array[i][key] == value) {
                 return array[i]
             }
         }
