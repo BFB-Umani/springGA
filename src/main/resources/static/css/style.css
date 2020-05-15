@@ -50,8 +50,12 @@ padding: 40px;
     color: indigo;
     position: fixed;
     right: 0px;
+    bottom:0px;
     background-color: #fefefe;
     border-radius: 50px;
     border-color: #fefefe;
     border-width: 4px;
+    cursor: pointer;
+
 }
+
