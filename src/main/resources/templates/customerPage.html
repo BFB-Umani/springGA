@@ -13,28 +13,30 @@
 <h1>Customer Page</h1>
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-sm-2">
             <a th:href="@{/customers/logout}" class="btn btn-success">Log out</a>
         </div>
-        <div class="col">
-            <a th:href="@{/}" class="btn btn-success">Cart</a>
-
-        </div>
-        <div class="col">
+        <div class="col-sm-2">
             <a th:href="@{/checkout}" class="btn btn-success">Check Out</a>
+        </div>
+
+        <div class="col-sm-8">
+            <form  action="#" th:action="@{chips/search}" method="get">
+                <input type="text" name="search" id="search"/>
+                <input type="submit" value="Search" class="btn btn-success"/>
+            </form>
         </div>
     </div>
 
 
 </div>
 
-<div class="container">
 
-    <form  action="#" th:action="@{chips/search}" method="get">
-        <input type="text" name="search" id="search"/>
-        <input type="submit" value="Search" class="btn btn-success"/>
-        <a th:href="@{/chips/list}" class="btn btn-success">Reset</a>
-    </form>
+<div class="cartSection">
+    <div class="row">
+        <div class="col-sm-10"></div>
+        <div class="col-sm-2"><img src="https://img.icons8.com/material-rounded/48/000000/shopping-cart.png"/></div>
+    </div>
 </div>
 
 <table class="table table-hover">
