@@ -31,6 +31,8 @@ public class PurchaseEntity implements Serializable {
     @ElementCollection
     Map<ChipsEntity, Long> entries = new TreeMap<>(Comparator.comparing(ChipsEntity::getId));
 
+    private long purchasePrice;
+
     private boolean applyDiscount = false;
 
     private Date dateOfPurchase;
@@ -64,5 +66,13 @@ public class PurchaseEntity implements Serializable {
 
     public CustomerEntity getCustomerEntity() {
         return customerEntity;
+    }
+
+    public long getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(long purchasePrice) {
+        this.purchasePrice = purchasePrice;
     }
 }

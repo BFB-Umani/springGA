@@ -6,6 +6,7 @@
     <title>Title</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 
 <body>
@@ -41,12 +42,86 @@
     <tbody>
     <tr th:each="chips: ${allChips}">
         <td th:text="${chips.getBrand()}"></td>
-        <td><img th:src="'/images/' + ${chips.getImage()}"></td>
+        <td>
+            <a th:id="${chips.id}" onclick="getId(this.id)">
+                <img th:src="'/images/' + ${chips.getImage()}" class="thumbnails">
+            </a>
+        </td>
         <td th:text="${chips.getName()}"></td>
         <td th:text="${chips.getPrice()}"></td>
     </tr>
     </tbody>
 </table>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Item picture</th>
+                <th>Flavor</th>
+                <th>Brand</th>
+            </tr>
+            </thead>
+            <tbody id="modal-table">
+            <tr>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    function getId(clicked_id) {
+        let imageId = clicked_id;
+
+        let chips = [[${allChips}]];
+
+        let chipsObject = findObjectByKey(chips, "id", imageId);
+        let flavor = document.createTextNode(chipsObject.name);
+        let brand = document.createTextNode(chipsObject.brand);
+
+        let img = document.createElement('img');
+        img.src = "/images/" + chipsObject.image;
+        let table = document.getElementById("modal-table");
+        document.getElementById("modal-table").deleteRow(0);
+        let row = table.insertRow();
+        let cell1 = row.insertCell();
+        let cell2 = row.insertCell();
+        let cell3 = row.insertCell();
+        cell1.appendChild(img);
+        cell2.appendChild(flavor);
+        cell3.appendChild(brand);
+
+        modal.style.display = "block";
+        let span = document.getElementsByClassName("close")[0];
+        span.onclick = function() {   modal.style.display = "none"; }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            } }
+    }
+
+    function findObjectByKey(array, key, value) {
+        for (let i = 0; i < array.length; i++) {
+            if(array[i][key] == value) {
+                return array[i]
+            }
+        }
+        return null;
+    }
+
+    // Get the modal
+    let modal = document.getElementById("myModal");
+    /*]]>*/
+</script>
 
 
 </body>

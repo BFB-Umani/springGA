@@ -5,6 +5,7 @@
     <title>Purchases</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
 
@@ -26,23 +27,22 @@
         <tr th:each="purchase: ${purchases}">
             <td><span th:text="${purchase.id}">Purchase ID</span></td>
             <td><span th:text="${purchase.dateOfPurchase}">Purchase Date</span></td>
-
-
-
-
+            <td><span th:text="${purchase.purchasePrice}">Purchase Date</span></td>
 
             <td>
-                <form action="#" th:action="@{'/adminPage/purchaseInfo/' + ${purchase.id}}">
-                    <button type="submit" class="btn btn-info">Go to PurchaseInfo</button>
-                </form>
+                <div class="col">
+                    <a th:href="@{'/adminPage/purchaseInfo/' + ${purchase.id}}" class="btn btn-success">Go to PurchaseInfo</a>
+                </div>
             </td>
 
         </tr>
 
     </tbody>
 </table>
-<form action="#" th:action="@{/adminPage/list}">
-    <button type="submit" class="btn btn-info">BACK</button>
-</form>
+
+<div class="col">
+    <a th:href="@{/adminPage/list}" class="btn btn-success">Back</a>
+</div>
+
 </body>
 </html>
