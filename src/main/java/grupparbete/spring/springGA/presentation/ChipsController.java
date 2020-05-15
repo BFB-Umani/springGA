@@ -30,8 +30,8 @@ public class ChipsController {
     }
 
     @GetMapping("/list")
-    public String login(Model theModel){
-        theModel.addAttribute("allChips",getAllChips());
+    public String login(Model theModel) {
+        theModel.addAttribute("allChips", getAllChips());
         return "customerPage";
     }
 
@@ -50,10 +50,14 @@ public class ChipsController {
 
     }
 
-    @GetMapping("/search/{searchWord}")
-    public List<ChipsEntity> searchForChips(@PathVariable String searchWord) {
-        return chipsService.search(searchWord);
+    @GetMapping("/chips/search")
+    public String searchForChips(@RequestParam(value = "search", required = false) String searchWord, Model model) {
+        List<ChipsEntity> chipsEntities = chipsService.search(searchWord);
+        model.addAttribute("search", chipsEntities);
+        model.addAttribute("searchWord", searchWord);
+        return "search";
+
     }
 
-    
+
 }

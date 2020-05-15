@@ -30,36 +30,45 @@
 
 <div class="container">
 
-    <form  action="#" th:action="@{chips/search}" method="get">
-        <input type="text" name="search" id="search"/>
-        <input type="submit" value="Search" class="btn btn-success"/>
-        <a th:href="@{/chips/list}" class="btn btn-success">Reset</a>
+    <div class="container">
+
+        <form  action="#" method="get">
+            <input type="text" name="search" id="search"/>
+            <input type="submit" value="Search" class="btn btn-success"/>
+            <a th:href="@{/chips/list}" class="btn btn-success">Reset</a>
+        </form>
+
+
+    </div>
+
+        <tr th:if="${search.isEmpty()}">
+            <td colspan="4">No matching chips found</td>
+        </tr>
+        <div th:if="${not #lists.isEmpty(search)}">
+            <h2>Chips List</h2>
+            <table class="table table-hover">
+                <tr>
+                    <th></th>
+                    <th>Brand</th>
+                    <th>Flavor</th>
+                    <th>Price</th>
+                </tr>
+                <tr th:each="chips: ${search}">
+                    <td>
+                        <a th:id="${chips.id}" onclick="getId(this.id)">
+                            <img th:src="'/images/' + ${chips.getImage()}" class="thumbnails">
+                        </a>
+                    </td>
+                    <td th:text="${chips.getBrand()}"></td>
+                    <td th:text="${chips.getName()}"></td>
+                    <td th:text="${chips.getPrice()}"></td>
+                    <td><button type="button" class="btn btn-info">Add to cart</button></td>
+                </tr>
+            </table>
+        </div>
     </form>
 </div>
 
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th>Brand</th>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Price</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <tr th:each="chips: ${allChips}">
-        <td th:text="${chips.getBrand()}"></td>
-        <td>
-            <a th:id="${chips.id}" onclick="getId(this.id)">
-                <img th:src="'/images/' + ${chips.getImage()}" class="thumbnails">
-            </a>
-        </td>
-        <td th:text="${chips.getName()}"></td>
-        <td th:text="${chips.getPrice()}"></td>
-    </tr>
-    </tbody>
-</table>
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
