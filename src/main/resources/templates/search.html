@@ -36,14 +36,12 @@
     <h1 id="coverChipsys"><img th:src="'/images/cover.png'" class="mt-5"></h1>
 </div>
 
-<div class="container">
 
 
         <tr th:if="${search.isEmpty()}">
             <td colspan="4">No matching chips found</td>
         </tr>
         <div th:if="${not #lists.isEmpty(search)}">
-            <h2>Chips List</h2>
             <table class="table table-hover">
                 <tr>
                     <th></th>
@@ -64,7 +62,7 @@
                 </tr>
             </table>
         </div>
-</div>
+
 
 <div class="cartSection">
     <div class="container">
