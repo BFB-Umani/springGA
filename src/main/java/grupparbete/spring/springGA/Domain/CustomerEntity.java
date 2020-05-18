@@ -26,10 +26,10 @@ public class CustomerEntity implements Serializable {
     private String country; // not null
     private String email; //behöver snabelA ("@")
     private String zipCode; //felhantering för input av bokstäver (får enbart innehålla siffror och max 5 tecken)
-//    private boolean premiumCustomer = false;
-//    private long totalAmountSpent;
+    private boolean premiumCustomer = false;
+  //  private long totalAmountSpent;
 
-    public CustomerEntity(String password, String firstName, String lastName, String address, String city, String country, String email, String zipCode) {
+    public CustomerEntity(String password, String firstName, String lastName, String address, String city, String country, String email, String zipCode,boolean premiumCustomer) {
         this.password=password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -38,6 +38,7 @@ public class CustomerEntity implements Serializable {
         this.country = country;
         this.email = email;
         this.zipCode = zipCode;
+        this.premiumCustomer = premiumCustomer;
 //        this.totalAmountSpent = 0;
     }
 
@@ -112,5 +113,13 @@ public class CustomerEntity implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public boolean isPremiumCustomer() {
+        return premiumCustomer;
+    }
+
+    public void setPremiumCustomer(boolean premiumCustomer) {
+        this.premiumCustomer = premiumCustomer;
     }
 }
