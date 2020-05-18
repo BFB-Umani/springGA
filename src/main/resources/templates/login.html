@@ -20,8 +20,9 @@
 
     <button type="submit" class="btn btn-success">Login</button>
     <br>
-    <a th:href="@{/registration}" class="btn btn-success">Register</a>
+    <a th:href="@{/registration}" class="btn btn-success">Register</a><br/>
 
+    <span th:text="${errormessage}"></span>
 </form>
 
 

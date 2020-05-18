@@ -51,13 +51,17 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute("userlogin") UserLoginRequestModel userLoginRequestModel) { // @RequestBody???
+    public String login(@ModelAttribute("userlogin") UserLoginRequestModel userLoginRequestModel, Model model) { // @RequestBody???
+        String errormessage = "";
+
         if (customerService.loadUserByEmail(userLoginRequestModel) != "fail") {
             return "redirect:/chips/list";
         } else if (adminService.loadUserByEmail(userLoginRequestModel) != "fail") {
             return "redirect:/adminPage/list";
         } else {
-            return "errorlogin";
+            errormessage= "Wrong username or password. Please try again.";
+            model.addAttribute("errormessage", errormessage);
+            return "login";
         }
     }
 }
