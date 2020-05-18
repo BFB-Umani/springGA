@@ -15,7 +15,15 @@ public class CartService {
     private List<ChipsEntity> cartList = new ArrayList<>();
     private long totalSum = 0;
     private int totalAmountOfItems = 0;
+    private String searchWord;
 
+    public String getSearchWord() {
+        return searchWord;
+    }
+
+    public void setSearchWord(String searchWord) {
+        this.searchWord = searchWord;
+    }
 
     public CartService(ChipsRepository chipsRepository) {
         this.chipsRepository = chipsRepository;
