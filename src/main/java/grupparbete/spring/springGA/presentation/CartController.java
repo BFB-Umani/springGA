@@ -30,4 +30,13 @@ public class CartController {
         return "redirect:/chips/list/";
     }
 
+    @GetMapping("searchadd/{id}")
+    public String addToCartFromSearch(@PathVariable Long id, Model model) {
+        Optional<ChipsEntity> chipsEntity = cartService.findChipsEntity(id);
+        String searchWordForURL = cartService.getSearchWord();
+        if (chipsEntity.isPresent()) {
+            cartService.addToCart(chipsEntity.get());
+        }
+        return "redirect:/chips/list/chips/search?search=" + searchWordForURL ;
+    }
 }
