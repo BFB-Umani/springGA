@@ -60,7 +60,7 @@
                     <td th:text="${chips.getBrand()}"></td>
                     <td th:text="${chips.getName()}"></td>
                     <td th:text="${chips.getPrice()}"></td>
-                    <td><button type="button" class="btn btn-success">Add to cart</button></td>
+                    <td><a th:href="@{'/add/'+${chips.id}}" class="btn btn-success">Add to cart</a></td>
                 </tr>
             </table>
         </div>
