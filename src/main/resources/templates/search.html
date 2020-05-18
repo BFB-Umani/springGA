@@ -64,7 +64,7 @@
         </div>
 
 
-<div class="cartSection">
+<div class="cartSection" onclick="getCart()">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -80,6 +80,29 @@
             </div>
         </div>
 
+    </div>
+</div>
+
+<!-- Cart Modal -->
+<div id="cartModal" class="cartModal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="closeCart">&times;</span>
+        <table id = cartTable class="table table-hover">
+            <thead>
+            <tr>
+                <th>Item picture</th>
+                <th>Flavor</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody id="cart-body">
+            <tr>
+
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -139,9 +162,48 @@
             } }
     }
 
+    function getCart() {
+        let chips = [[${cartlist}]];
+
+        let cartTable = document.getElementById("cartTable");
+        cartTable.removeChild(cartTable.getElementsByTagName("tbody")[0]);
+        cartTable.appendChild(document.createElement("tbody"));
+
+        cartTable.getElementsByTagName("tbody")[0].setAttribute("id", "cart-body");
+
+
+        for (let i = 0; i < chips.length; i++) {
+            let chipsObject = chips[i];
+            let flavor = document.createTextNode(chipsObject.name);
+            let price = document.createTextNode(chipsObject.price);
+
+            let img = document.createElement('img');
+            img.src = "/images/" + chipsObject.image;
+            let table = document.getElementById("cart-body");
+            let row = table.insertRow();
+            let cell1 = row.insertCell();
+            let cell2 = row.insertCell();
+            let cell3 = row.insertCell();
+            cell1.appendChild(img);
+            cell2.appendChild(flavor);
+            cell3.appendChild(price);
+        }
+
+        cartModal.style.display = "block";
+        let span = document.getElementsByClassName("closeCart")[0];
+        span.onclick = function () {
+            cartModal.style.display = "none";
+        }
+        window.onclick = function (event) {
+            if (event.target == cartModal) {
+                cartModal.style.display = "none";
+            }
+        }
+    }
+
     function findObjectByKey(array, key, value) {
         for (let i = 0; i < array.length; i++) {
-            if(array[i][key] == value) {
+            if (array[i][key] == value) {
                 return array[i]
             }
         }
@@ -150,6 +212,7 @@
 
     // Get the modal
     let modal = document.getElementById("myModal");
+    let cartModal = document.getElementById("cartModal");
     /*]]>*/
 </script>
 

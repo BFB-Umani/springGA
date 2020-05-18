@@ -10,12 +10,13 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 @Entity(name = "customers")
+@SequenceGenerator(name="seqCus", initialValue=10, allocationSize = 1)
 public class CustomerEntity implements Serializable {
 
 //   @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "customerEntity")
 //    private List<PurchaseEntity> purchaseList;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCus")
     private Long id;
 
     private String password;

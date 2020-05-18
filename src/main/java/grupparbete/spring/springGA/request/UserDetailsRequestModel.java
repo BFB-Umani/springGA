@@ -1,7 +1,6 @@
 package grupparbete.spring.springGA.request;
 
 public class UserDetailsRequestModel {
-    private String userName;
     private String password;
     private String firstName; //inga siffror/konstiga tecken, minst 2 bokstäver max 40
     private String lastName; //inga siffror/konstiga tecken, minst 2 bokstäver max 40
@@ -66,14 +65,6 @@ public class UserDetailsRequestModel {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getPassword() {
