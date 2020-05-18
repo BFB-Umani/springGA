@@ -12,6 +12,7 @@
     /* Full width */
     height: 100%;
     /* Full height */
+    overflow-x: scroll;
 }
 .cartModal {
     display: none;
@@ -36,6 +37,7 @@
     padding: 20px;
     border: 1px solid #888;
     width: 60%;
+    text-align: center;
 }
 
 /* The Close Button */
@@ -44,6 +46,7 @@
     float: right;
     font-size: 28px;
     font-weight: bold;
+    text-align: end;
 }
 
 .close:hover, .close:focus {
@@ -58,6 +61,7 @@
     float: right;
     font-size: 28px;
     font-weight: bold;
+    text-align: end;
 }
 
 .closeCart:hover, .closeCart:focus {
@@ -68,6 +72,10 @@
 
 .thumbnails {
     width: 300px;
+}
+
+.cartThumbnail {
+    width: 100px;
 }
 
 .thumbnails:hover, .thumbnails:focus {

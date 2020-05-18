@@ -27,12 +27,14 @@ public class ChipsEntity implements Serializable {
     //private String displayPrice;
     private String image;
     private String brand;
+    private long quantity;
 
-    public ChipsEntity(String name, long price, String image, String brand) {
+    public ChipsEntity(String name, long price, String image, String brand, long quantity) {
     this.name=name;
     this.price=price;
     this.image=image;
     this.brand=brand;
+    this.quantity = quantity;
     }
 
     public ChipsEntity() {}
@@ -71,5 +73,13 @@ public class ChipsEntity implements Serializable {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public void setQuantity(long quantity) {
+        this.quantity = quantity;
+    }
+
+    public long getQuantity() {
+        return quantity;
     }
 }

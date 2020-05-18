@@ -31,10 +31,25 @@ public class CartService {
 
 
     public void addToCart(ChipsEntity chipsEntity) {
-        cartList.add(chipsEntity);
-        totalAmountOfItems++;
-        totalSum = totalSum+chipsEntity.getPrice();
 
+        boolean notInCart = true;
+
+        for (int i = 0; i < cartList.size(); i++) {
+            if (chipsEntity.getName().equals(cartList.get(i).getName())) {
+                cartList.get(i).setQuantity(cartList.get(i).getQuantity() + 1);
+                totalAmountOfItems++;
+                totalSum = totalSum+chipsEntity.getPrice();
+                notInCart = false;
+                break;
+            }
+        }
+
+        if(notInCart) {
+            chipsEntity.setQuantity(1);
+            cartList.add(chipsEntity);
+            totalAmountOfItems++;
+            totalSum = totalSum + chipsEntity.getPrice();
+        }
     }
 
     public List<ChipsEntity> getCartList() {

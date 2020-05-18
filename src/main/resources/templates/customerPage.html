@@ -99,7 +99,7 @@
             <thead>
             <tr>
                 <th>Item picture</th>
-                <th>Flavor</th>
+                <th>Quantity</th>
                 <th>Price</th>
             </tr>
             </thead>
@@ -108,6 +108,13 @@
 
             </tr>
             </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><span th:text="'Total price: ' + ${totalsum} + ' Kr'"></span></td>
+            </tr>
+            </tfoot>
         </table>
     </div>
 </div>
@@ -184,18 +191,20 @@
 
         for (let i = 0; i < chips.length; i++) {
             let chipsObject = chips[i];
-            let flavor = document.createTextNode(chipsObject.name);
-            let price = document.createTextNode(chipsObject.price);
+            let quantity = document.createTextNode(chipsObject.quantity);
+            let price = document.createTextNode(chipsObject.price + " kr/st");
 
             let img = document.createElement('img');
-            img.src = "/images/" + chipsObject.image;
+            img.src = "/images/cartThumbs/" + chipsObject.image;
+            img.setAttribute("class", "cartThumbnail");
             let table = document.getElementById("cart-body");
             let row = table.insertRow();
             let cell1 = row.insertCell();
             let cell2 = row.insertCell();
             let cell3 = row.insertCell();
+            cell1.setAttribute("class", "cartThumbnail");
             cell1.appendChild(img);
-            cell2.appendChild(flavor);
+            cell2.appendChild(quantity);
             cell3.appendChild(price);
         }
 
