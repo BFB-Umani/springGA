@@ -65,6 +65,7 @@ public class ChipsController {
         model.addAttribute("cartlist", cartService.getCartList());
         model.addAttribute("totalsum", cartService.getTotalSum());
         model.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
+        cartService.setSearchWord(searchWord);
         return "search";
 
     }
