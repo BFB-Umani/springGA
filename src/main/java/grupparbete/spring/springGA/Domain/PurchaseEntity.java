@@ -13,16 +13,17 @@ import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
 
-@RequiredArgsConstructor
+
 @Getter
 @ToString
 @EqualsAndHashCode
 @Entity(name = "Purchases")
+@SequenceGenerator(name="seqPur", initialValue=4, allocationSize = 1)
 public class PurchaseEntity implements Serializable {
 
     @Id
     @Column(nullable = false)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqPur")
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)

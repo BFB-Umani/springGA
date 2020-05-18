@@ -1,14 +1,13 @@
 package grupparbete.spring.springGA.Domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity(name = "admins")
+@SequenceGenerator(name="seqAd", initialValue=4, allocationSize = 1)
 public class AdminEntity implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAd")
     private Long id;
 
     private String email;
