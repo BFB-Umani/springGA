@@ -36,21 +36,20 @@
     <h1 id="coverChipsys"><img th:src="'/images/cover.png'" class="mt-5"></h1>
 </div>
 
-<div class="container">
 
 
         <tr th:if="${search.isEmpty()}">
             <td colspan="4">No matching chips found</td>
         </tr>
         <div th:if="${not #lists.isEmpty(search)}">
-            <h2>Chips List</h2>
             <table class="table table-hover">
                 <tr>
                     <th></th>
                     <th>Brand</th>
-                    <th>Flavor</th>
+                    <th>Name</th>
                     <th>Price</th>
                 </tr>
+                <tbody>
                 <tr th:each="chips: ${search}">
                     <td>
                         <a th:id="${chips.id}" onclick="getId(this.id)">
@@ -62,9 +61,10 @@
                     <td th:text="${chips.getPrice()}"></td>
                     <td><a th:href="@{'/add/'+${chips.id}}" class="btn btn-success">Add to cart</a></td>
                 </tr>
+                <tbody>
             </table>
         </div>
-</div>
+
 
 <div class="cartSection">
     <div class="container">
@@ -74,7 +74,7 @@
             </div>
             <div class="col">
                 <div class="row">
-                    <span>0 Items</span>
+                    <span>0 Item(s)</span>
                 </div>
                 <div class="row">
                     <span>0 SEK</span>
