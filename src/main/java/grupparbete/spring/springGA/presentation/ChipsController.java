@@ -2,6 +2,7 @@ package grupparbete.spring.springGA.presentation;
 
 import grupparbete.spring.springGA.Domain.ChipsEntity;
 import grupparbete.spring.springGA.request.UserLoginRequestModel;
+import grupparbete.spring.springGA.service.CartService;
 import grupparbete.spring.springGA.service.ChipsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,14 @@ import java.util.Optional;
 public class ChipsController {
 
     private ChipsService chipsService;
+    private CartService cartService;
+
+    public ChipsController(ChipsService chipsService, CartService cartService) {
+        this.chipsService = chipsService;
+        this.cartService = cartService;
+    }
 
     @Autowired
-    public ChipsController(ChipsService chipsService) {
-        this.chipsService = chipsService;
-    }
 
     @GetMapping
     public List<ChipsEntity> getAllChips() {
@@ -32,6 +36,9 @@ public class ChipsController {
     @GetMapping("/list")
     public String login(Model theModel) {
         theModel.addAttribute("allChips", getAllChips());
+        theModel.addAttribute("cartlist", cartService.getCartList());
+        theModel.addAttribute("totalsum", cartService.getTotalSum());
+        theModel.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
         return "customerPage";
     }
 
@@ -50,7 +57,7 @@ public class ChipsController {
 
     }
 
-    @GetMapping("/chips/search")
+    @GetMapping("/list/chips/search")
     public String searchForChips(@RequestParam(value = "search", required = false) String searchWord, Model model) {
         List<ChipsEntity> chipsEntities = chipsService.search(searchWord);
         model.addAttribute("search", chipsEntities);
