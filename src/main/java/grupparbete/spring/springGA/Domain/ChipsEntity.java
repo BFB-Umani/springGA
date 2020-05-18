@@ -9,16 +9,17 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 import static javax.persistence.CascadeType.PERSIST;
-@RequiredArgsConstructor
+
 @Getter
 @ToString
 @EqualsAndHashCode
 @Entity(name = "chips")
+@SequenceGenerator(name="seqChi", initialValue=15, allocationSize = 1)
 public class ChipsEntity implements Serializable {
 
     @Id
     @Column(nullable = false)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqChi")
     private Long id;
 
     private String name;
@@ -33,6 +34,8 @@ public class ChipsEntity implements Serializable {
     this.image=image;
     this.brand=brand;
     }
+
+    public ChipsEntity() {}
 
     public Long getId() {
         return id;
