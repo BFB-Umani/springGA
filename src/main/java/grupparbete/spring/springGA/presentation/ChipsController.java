@@ -62,6 +62,9 @@ public class ChipsController {
         List<ChipsEntity> chipsEntities = chipsService.search(searchWord);
         model.addAttribute("search", chipsEntities);
         model.addAttribute("searchWord", searchWord);
+        model.addAttribute("cartlist", cartService.getCartList());
+        model.addAttribute("totalsum", cartService.getTotalSum());
+        model.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
         return "search";
 
     }
