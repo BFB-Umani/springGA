@@ -1,9 +1,11 @@
 package grupparbete.spring.springGA.presentation;
 
 import grupparbete.spring.springGA.Domain.ChipsEntity;
+import grupparbete.spring.springGA.Domain.CustomerEntity;
 import grupparbete.spring.springGA.request.UserLoginRequestModel;
 import grupparbete.spring.springGA.service.CartService;
 import grupparbete.spring.springGA.service.ChipsService;
+import grupparbete.spring.springGA.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +22,15 @@ public class ChipsController {
 
     private ChipsService chipsService;
     private CartService cartService;
-
-    public ChipsController(ChipsService chipsService, CartService cartService) {
-        this.chipsService = chipsService;
-        this.cartService = cartService;
-    }
+    private CustomerService customerService;
 
     @Autowired
+    public ChipsController(ChipsService chipsService, CartService cartService, CustomerService customerService) {
+        this.chipsService = chipsService;
+        this.cartService = cartService;
+        this.customerService = customerService;
+    }
+
 
     @GetMapping
     public List<ChipsEntity> getAllChips() {
@@ -35,11 +39,18 @@ public class ChipsController {
 
     @GetMapping("/list")
     public String login(Model theModel) {
-        theModel.addAttribute("allChips", getAllChips());
-        theModel.addAttribute("cartlist", cartService.getCartList());
-        theModel.addAttribute("totalsum", cartService.getTotalSum());
-        theModel.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
-        return "customerPage";
+        String page = "";
+        if (customerService.isCustomerLoggedIn()) {
+            theModel.addAttribute("allChips", getAllChips());
+            theModel.addAttribute("cartlist", cartService.getCartList());
+            theModel.addAttribute("totalsum", cartService.getTotalSum());
+            theModel.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
+            page = "customerPage";
+        } else {
+            page = "error";
+        }
+
+        return page;
     }
 
     @GetMapping("/{id}")
@@ -59,17 +70,21 @@ public class ChipsController {
 
     @GetMapping("/list/chips/search")
     public String searchForChips(@RequestParam(value = "search", required = false) String searchWord, Model model) {
-        List<ChipsEntity> chipsEntities = chipsService.search(searchWord);
-        model.addAttribute("search", chipsEntities);
-        model.addAttribute("searchWord", searchWord);
-        model.addAttribute("cartlist", cartService.getCartList());
-        model.addAttribute("totalsum", cartService.getTotalSum());
-        model.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
-        cartService.setSearchWord(searchWord);
-        return "search";
-
+        String page = "";
+        if (customerService.isCustomerLoggedIn()) {
+            List<ChipsEntity> chipsEntities = chipsService.search(searchWord);
+            model.addAttribute("search", chipsEntities);
+            model.addAttribute("searchWord", searchWord);
+            model.addAttribute("cartlist", cartService.getCartList());
+            model.addAttribute("totalsum", cartService.getTotalSum());
+            model.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
+            cartService.setSearchWord(searchWord);
+            page = "search";
+        } else {
+            page = "error";
+        }
+        return page;
     }
-
 
 
 }

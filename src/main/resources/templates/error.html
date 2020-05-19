@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Oh no!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    
+    <div class="d-flex justify-content-center">
+        <h1 id="coverChipsys"><img th:src="'/images/cover.png'" class="mt-5"></h1>
+    </div>
+
+            <h3 class="text-center">Oh no!</h3>
+            <h5 class="text-center">It seems like you're not logged in. <a th:href="@{/login}">Please log in</a> to take part in all the Chipsy greatness.</h5>
+
+
+</div>
+
+</body>
+</html>

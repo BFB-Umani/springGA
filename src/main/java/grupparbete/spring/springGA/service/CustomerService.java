@@ -21,16 +21,16 @@ public class CustomerService {
     private CustomerEntity currentCustomerEntity;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository){
+    public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
-    public List<CustomerEntity> getAllCustomers(){
+    public List<CustomerEntity> getAllCustomers() {
         return customerRepository.findAll();
     }
 
 
-    public CustomerEntity getCustomerById(long id){
+    public CustomerEntity getCustomerById(long id) {
         return customerRepository.findById(id);
     }
 
@@ -51,17 +51,17 @@ public class CustomerService {
 
     public String loadUserByEmail(UserLoginRequestModel userLoginRequestModel) { //changed from loadUserByUserName
         String result = "fail";
-        try{
+        try {
             CustomerEntity customerEntity = customerRepository.findByEmail(userLoginRequestModel.getEmail());
-            if (customerEntity.getPassword().equals(userLoginRequestModel.getPassword())){
+            if (customerEntity.getPassword().equals(userLoginRequestModel.getPassword())) {
                 setCurrentCustomerEntity(customerEntity);
-                result= "success";
+                result = "success";
             }
-        }catch (NullPointerException e){
-            result= "fail";
+        } catch (NullPointerException e) {
+            result = "fail";
         }
 
-return result;
+        return result;
     }
 
     public CustomerEntity getCurrentCustomerEntity() {
@@ -76,4 +76,11 @@ return result;
         customerRepository.save(customerEntity);
     }
 
+    public boolean isCustomerLoggedIn() {
+        boolean loggedin = false;
+        if (getCurrentCustomerEntity() != null) {
+            loggedin = true;
+        }
+        return loggedin;
+    }
 }

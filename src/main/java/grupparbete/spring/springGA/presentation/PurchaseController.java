@@ -36,18 +36,20 @@ public class PurchaseController {
 
     @GetMapping("/reciept")
     public String makePurchase(Model theModel) {
-        purchaseService.addProduct(cartService.getCartList(), customerService.getCurrentCustomerEntity());
-        theModel.addAttribute("cartlist", cartService.getCartList());
-        theModel.addAttribute("totalsum", cartService.getTotalSum());
-        theModel.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
-        cartService.emptyCart();
-        return "recieptPage";
+        String page = "";
+        if (customerService.isCustomerLoggedIn()) {
+            purchaseService.addProduct(cartService.getCartList(), customerService.getCurrentCustomerEntity());
+            theModel.addAttribute("cartlist", cartService.getCartList());
+            theModel.addAttribute("totalsum", cartService.getTotalSum());
+            theModel.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
+            cartService.emptyCart();
+            page = "recieptPage";
+        } else {
+            page = "error";
+        }
+
+        return page;
     }
-
-//    public Optional<PurchaseEntity> getAPurchase(long id){
-//        return purchaseService.getAPurchase(id);
-//    }
-
 
 
 }

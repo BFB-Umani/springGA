@@ -22,6 +22,7 @@ public class AdminService {
         try{
             AdminEntity adminEntity = adminRepository.findByEmail(userLoginRequestModel.getEmail());
             if (adminEntity.getPassword().equals(userLoginRequestModel.getPassword())){
+                setCurrentAdminEntity(adminEntity);
                 result = "success";
             }
         } catch (NullPointerException e) {
@@ -36,5 +37,13 @@ return result;
 
     public AdminEntity getCurrentAdminEntity() {
         return currentAdminEntity;
+    }
+
+    public boolean isAdminLoggedIn() {
+        boolean loggedin = false;
+        if (getCurrentAdminEntity() != null) {
+            loggedin = true;
+        }
+        return loggedin;
     }
 }

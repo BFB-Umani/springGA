@@ -37,10 +37,15 @@ public class AdminController {
 
     @GetMapping("/list")
     public String listCustomers(Model model){
-        List<CustomerEntity> customerEntityList = customerService.getAllCustomers();
-        model.addAttribute("customers", customerEntityList);
-
-        return "adminPage";
+        String page = "";
+        if (adminService.isAdminLoggedIn()) {
+            List<CustomerEntity> customerEntityList = customerService.getAllCustomers();
+            model.addAttribute("customers", customerEntityList);
+            page = "adminPage";
+        } else {
+            page = "error";
+        }
+        return page;
     }
 
 //    @GetMapping("/purchases")
@@ -51,20 +56,33 @@ public class AdminController {
 
     @GetMapping("/purchaseInfo/{id}")
     public String goToPurchaseInfo(@PathVariable long id, Model model){
-        CustomerEntity customerEntity = purchaseService.getCustomerByPurchaseID(id);
-        List<ChipsEntity> chipsEntityList = getChipsByPurchaseID(id);
-        model.addAttribute("customer", customerEntity);
-        model.addAttribute("chips", chipsEntityList);
-        return "purchaseInfo";
+        String page = "";
+        if (adminService.isAdminLoggedIn()) {
+            CustomerEntity customerEntity = purchaseService.getCustomerByPurchaseID(id);
+            List<ChipsEntity> chipsEntityList = getChipsByPurchaseID(id);
+            model.addAttribute("customer", customerEntity);
+            model.addAttribute("chips", chipsEntityList);
+            page = "purchaseInfo";
+        } else {
+            page = "error";
+        }
+        return page;
     }
 
     @GetMapping("/purchases/{id}")
+
         public String goToCorneliaPurchase(@PathVariable long id, Model model){
-        List<PurchaseEntity> purchaseEntityList = getPurchasesByCustomerID(id);
-        CustomerEntity customerEntity = customerService.getCustomerById(id);
-        model.addAttribute("purchases", purchaseEntityList);
-        model.addAttribute("chosencustomer",customerEntity);
-        return "purchases";
+        String page = "";
+        if (adminService.isAdminLoggedIn()) {
+            List<PurchaseEntity> purchaseEntityList = getPurchasesByCustomerID(id);
+            CustomerEntity customerEntity = customerService.getCustomerById(id);
+            model.addAttribute("purchases", purchaseEntityList);
+            model.addAttribute("chosencustomer",customerEntity);
+            page = "purchases";
+        } else {
+            page = "error";
+        }
+        return page;
     }
 
     public List<ChipsEntity> getChipsByPurchaseID(long id) {

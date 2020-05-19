@@ -29,14 +29,20 @@ public class CustomerController {
         this.cartService = cartService;
     }
 
-    public List<CustomerEntity> getAllCustomers(){
+    public List<CustomerEntity> getAllCustomers() {
         return customerService.getAllCustomers();
     }
 
 
     @GetMapping
-    public String goToCustomersPage(){
-        return "customerPage";
+    public String goToCustomersPage() {
+        String page = "";
+        if (customerService.isCustomerLoggedIn()) {
+            page = "customerPage";
+        } else {
+            page = "error";
+        }
+return page;
     }
 
 
@@ -51,17 +57,17 @@ public class CustomerController {
     }
 
     @PostMapping("/save")
-    public String saveACustomer(@ModelAttribute("customer") CustomerEntity customerEntity){
+    public String saveACustomer(@ModelAttribute("customer") CustomerEntity customerEntity) {
         customerService.save(customerEntity);
         return "redirect:/login";
 
     }
+
     @GetMapping("/logout")
-    public String logOut(){
+    public String logOut() {
         customerService.setCurrentCustomerEntity(null);
         cartService.emptyCart();
         return "redirect:/login";
     }
-
 
 }
