@@ -35,7 +35,7 @@ public class CartService {
         boolean notInCart = true;
 
         for (int i = 0; i < cartList.size(); i++) {
-            if (chipsEntity.getName().equals(cartList.get(i).getName())) {
+            if (chipsEntity.getId().equals(cartList.get(i).getId())) {
                 cartList.get(i).setQuantity(cartList.get(i).getQuantity() + 1);
                 totalAmountOfItems++;
                 totalSum = totalSum+chipsEntity.getPrice();

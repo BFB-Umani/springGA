@@ -117,3 +117,47 @@ padding: 40px;
     alignment: center;
 }
 
+.login {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    text-align: center;
+    padding-top: 50px;
+    grid-column-gap: 10px;
+}
+
+#email {
+    grid-column-start: 5;
+    grid-row-start: 1;
+    padding: 10px;
+}
+
+#userNameInput {
+    grid-column-start: 6;
+    grid-row-start: 1;
+    padding: 10px;
+}
+
+#password {
+    grid-column-start: 5;
+    grid-row-start: 3;
+    padding: 10px;
+}
+
+#passwordInput {
+    grid-column-start: 6;
+    grid-row-start: 3;
+    padding: 10px;
+}
+
+#loginBtn {
+    grid-column-start: 5;
+    grid-row-start: 5;
+    padding: 10px;
+}
+
+#registerBtn {
+    grid-column-start: 6;
+    grid-row-start: 5;
+    padding: 10px;
+}
