@@ -83,4 +83,34 @@ public class CustomerService {
         }
         return loggedin;
     }
+
+    public long getTotalPrice(){
+        List<PurchaseEntity> purchaseList = customerRepository.findByEmail(currentCustomerEntity.getEmail()).getPurchaseList();
+        long sum = 0;
+        for(PurchaseEntity purchaseEntity :purchaseList ){
+           sum += purchaseEntity.getPurchasePrice();
+        }
+        return sum;
+    }
+
+    public CustomerRepository getCustomerRepository() {
+        return customerRepository;
+    }
+
+    public long calculateSpentSumForACustomer(){
+        long totalSpentSumForACustomer = currentCustomerEntity.getTotalAmountSpent() + getTotalPrice();
+        currentCustomerEntity.setTotalAmountSpent(totalSpentSumForACustomer);
+        return totalSpentSumForACustomer;
+    }
+
+    public boolean upgradeCustomerToPremium(){
+        if(calculateSpentSumForACustomer()>=500000 && !currentCustomerEntity.isPremiumCustomer()){
+            currentCustomerEntity.setPremiumCustomer(true);
+            customerRepository.save(currentCustomerEntity);
+            return true;
+        }
+        return false;
+    }
+
+
 }

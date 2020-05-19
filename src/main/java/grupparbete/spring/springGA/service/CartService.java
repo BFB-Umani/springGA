@@ -2,6 +2,7 @@ package grupparbete.spring.springGA.service;
 
 import grupparbete.spring.springGA.Domain.ChipsEntity;
 import grupparbete.spring.springGA.persistance.ChipsRepository;
+import grupparbete.spring.springGA.persistance.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.Optional;
 public class CartService {
 
     private ChipsRepository chipsRepository;
+    private CustomerService customerService;
     private List<ChipsEntity> cartList = new ArrayList<>();
     private long totalSum = 0;
     private int totalAmountOfItems = 0;
@@ -25,8 +27,9 @@ public class CartService {
         this.searchWord = searchWord;
     }
 
-    public CartService(ChipsRepository chipsRepository) {
+    public CartService(ChipsRepository chipsRepository,CustomerService customerService) {
         this.chipsRepository = chipsRepository;
+        this.customerService = customerService;
     }
 
 
@@ -67,6 +70,9 @@ public class CartService {
     }
 
     public long getTotalSum() {
+        if(customerService.getCurrentCustomerEntity().isPremiumCustomer()){
+        return (long) (totalSum*0.9);
+        }
         return totalSum;
     }
 

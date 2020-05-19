@@ -24,13 +24,13 @@ public class PurchaseController {
     private CartService cartService;
 
     @Autowired
-    public PurchaseController(PurchaseService purchaseService, CustomerService customerService, CartService cartService){
+    public PurchaseController(PurchaseService purchaseService, CustomerService customerService, CartService cartService) {
         this.purchaseService = purchaseService;
         this.customerService = customerService;
         this.cartService = cartService;
     }
 
-    public List<PurchaseEntity> getAllPurchases(){
+    public List<PurchaseEntity> getAllPurchases() {
         return purchaseService.getAllPurchases();
     }
 
@@ -40,9 +40,16 @@ public class PurchaseController {
         if (customerService.isCustomerLoggedIn()) {
             purchaseService.addProduct(cartService.getCartList(), customerService.getCurrentCustomerEntity());
             theModel.addAttribute("cartlist", cartService.getCartList());
+
             theModel.addAttribute("totalsum", cartService.getTotalSum());
             theModel.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
             cartService.emptyCart();
+
+            if (customerService.upgradeCustomerToPremium()) {
+                theModel.addAttribute("upgradeToPremium", "Congratulations! You are our premium customer now! You will get 10% discount for all purchases in the future.");
+            }else{
+                theModel.addAttribute("upgradeToPremium", "");
+            }
             page = "recieptPage";
         } else {
             page = "error";
@@ -50,5 +57,6 @@ public class PurchaseController {
 
         return page;
     }
-    
+
+
 }

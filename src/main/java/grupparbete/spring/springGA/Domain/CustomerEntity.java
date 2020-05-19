@@ -10,14 +10,15 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 @Entity(name = "customers")
-@SequenceGenerator(name="seqCus", initialValue=10, allocationSize = 1)
+@SequenceGenerator(name = "seqCus", initialValue = 10, allocationSize = 1)
 public class CustomerEntity implements Serializable {
 
-//   @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "customerEntity")
-//    private List<PurchaseEntity> purchaseList;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqCus")
     private Long id;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "customerEntity")
+    private List<PurchaseEntity> purchaseList;
 
     private String password;
     private String firstName; //inga siffror/konstiga tecken, minst 2 bokstäver max 40
@@ -28,10 +29,10 @@ public class CustomerEntity implements Serializable {
     private String email; //behöver snabelA ("@")
     private String zipCode; //felhantering för input av bokstäver (får enbart innehålla siffror och max 5 tecken)
     private boolean premiumCustomer = false;
-  //  private long totalAmountSpent;
+    private long totalAmountSpent;
 
-    public CustomerEntity(String password, String firstName, String lastName, String address, String city, String country, String email, String zipCode,boolean premiumCustomer) {
-        this.password=password;
+    public CustomerEntity(String password, String firstName, String lastName, String address, String city, String country, String email, String zipCode, boolean premiumCustomer) {
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -40,7 +41,7 @@ public class CustomerEntity implements Serializable {
         this.email = email;
         this.zipCode = zipCode;
         this.premiumCustomer = premiumCustomer;
-//        this.totalAmountSpent = 0;
+        this.totalAmountSpent = 0;
     }
 
     public CustomerEntity() {
@@ -122,5 +123,21 @@ public class CustomerEntity implements Serializable {
 
     public void setPremiumCustomer(boolean premiumCustomer) {
         this.premiumCustomer = premiumCustomer;
+    }
+
+    public long getTotalAmountSpent() {
+        return totalAmountSpent;
+    }
+
+    public void setTotalAmountSpent(long totalAmountSpent) {
+        this.totalAmountSpent = totalAmountSpent;
+    }
+
+    public List<PurchaseEntity> getPurchaseList() {
+        return purchaseList;
+    }
+
+    public void setPurchaseList(List<PurchaseEntity> purchaseList) {
+        this.purchaseList = purchaseList;
     }
 }
