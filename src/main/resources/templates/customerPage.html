@@ -94,6 +94,7 @@
                 <th>Item picture</th>
                 <th>Quantity</th>
                 <th>Price</th>
+                <th>Change Quantity</th>
             </tr>
             </thead>
             <tbody id="cart-body">
@@ -186,6 +187,11 @@
             let chipsObject = chips[i];
             let quantity = document.createTextNode(chipsObject.quantity);
             let price = document.createTextNode(chipsObject.price + " kr/st");
+            let plusbutton = document.createElement("button");
+            let minusbutton = document.createElement("button");
+            minusbutton.innerHTML="-";
+            plusbutton.innerHTML= "+";
+
 
             let img = document.createElement('img');
             img.src = "/images/cartThumbs/" + chipsObject.image;
@@ -195,10 +201,17 @@
             let cell1 = row.insertCell();
             let cell2 = row.insertCell();
             let cell3 = row.insertCell();
+            let cell4 = row.insertCell();
             cell1.setAttribute("class", "cartThumbnail");
             cell1.appendChild(img);
             cell2.appendChild(quantity);
             cell3.appendChild(price);
+            cell4.appendChild(minusbutton);
+            cell4.appendChild(plusbutton);
+
+            minusbutton.addEventListener("click", function () {
+       
+            })
         }
 
         cartModal.style.display = "block";
