@@ -26,8 +26,4 @@ public class CheckoutController {
         theModel.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
         return "checkoutPage";
     }
-    @GetMapping("/reciept")
-    public String goToShowOrder(){
-        return "recieptPage";
-    }
 }

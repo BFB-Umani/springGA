@@ -27,7 +27,7 @@
         <tr th:each="purchase: ${purchases}">
             <td><span th:text="${purchase.id}">Purchase ID</span></td>
             <td><span th:text="${purchase.dateOfPurchase}">Purchase Date</span></td>
-            <td><span th:text="${purchase.purchasePrice}">Purchase Date</span></td>
+            <td><span th:text="${purchase.purchasePrice} + ' Kr'">Purchase Date</span></td>
 
             <td>
                 <div class="col">

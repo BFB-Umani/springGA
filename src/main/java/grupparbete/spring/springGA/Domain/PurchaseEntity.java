@@ -69,6 +69,10 @@ public class PurchaseEntity implements Serializable {
         return customerEntity;
     }
 
+    public void setCustomerEntity(CustomerEntity customerEntity) {this.customerEntity = customerEntity;
+
+    }
+
     public long getPurchasePrice() {
         return purchasePrice;
     }

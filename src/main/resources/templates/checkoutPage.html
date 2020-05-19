@@ -20,9 +20,6 @@
             <li class="nav-item mx-4">
             </li>
             <li class="nav-item mx-4">
-                <a th:href="@{/checkout/reciept}" class="nav-link">Confirm order</a>
-            </li>
-            <li class="nav-item mx-4">
                 <a th:href="@{/chips/list}" class="nav-link">Go back</a>
             </li>
             <li class="nav-item mx-4">
@@ -46,6 +43,7 @@
         <th></th>
         <th>Brand</th>
         <th>Flavor</th>
+        <th>Quantity</th>
         <th>Price</th>
     </tr>
     </thead>
@@ -55,22 +53,32 @@
 
         <td>
             <a th:id="${chips.id}" onclick="getId(this.id)">
-                <img th:src="'/images/' + ${chips.getImage()}" class="thumbnails">
+                <img th:src="'/images/cartThumbs/' + ${chips.getImage()}" class="cartThumbnail">
             </a>
         </td>
         <td th:text="${chips.getBrand()}"></td>
         <td th:text="${chips.getName()}"></td>
-        <td th:text="${chips.getPrice()}"></td>
+        <td th:text="${chips.getQuantity()}"></td>
+        <td th:text="${chips.getPrice()} + ' Kr/st'"></td>
     </tr>
     </tbody>
+    <tfoot class="checkoutTable">
+    <tr>
+        <td></td>
+        <td></td>
+        <td><span th:text="'Total price: ' + ${totalsum} + ' Kr'"></span></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td><a th:href="@{/purchases/reciept}" class="btn btn-success">Confirm order</a></td>
+        <td></td>
+        <td></td>
+    </tr>
+    </tfoot>
 </table>
-
-<div class="row">
-    <div class="mx-auto" style="width: 200px;">
-        <span th:text="'Total: '+ ${totalsum}"></span><span>&nbsp;SEK</span>
-    </div>
-</div>
-</div>
 
 </body>
 </html>

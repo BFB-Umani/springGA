@@ -13,6 +13,7 @@
     <thead>
     <tr>
         <th>Item picture</th>
+        <th>Item Quantity</th>
         <th>Item name</th>
         <th>Item Price</th>
     </tr>
@@ -27,8 +28,9 @@
                 <img th:src="@{'/images/' + ${chipsObject.image}}" class="thumbnails">
             </a>
         </td>
+        <td><span th:text="${chipsObject.quantity}">Quantity</span></td>
         <td><span th:text="${chipsObject.name}">Name</span></td>
-        <td><span th:text="${chipsObject.price}">Price</span></td>
+        <td><span th:text="${chipsObject.price} + ' Kr/st'">Price</span></td>
     </tr>
 
     </tbody>

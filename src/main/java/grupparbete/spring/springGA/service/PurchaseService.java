@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,11 @@ public class PurchaseService {
 
     public List<ChipsEntity> getChipsByPurchaseID(long id){
         PurchaseEntity purchaseEntity = purchaseRepository.findPurchaseById(id);
-        return new ArrayList<>(purchaseEntity.getEntries().keySet());
+        List<ChipsEntity> chipsList = new ArrayList<>(purchaseEntity.getEntries().keySet());
+        for (int i = 0; i < chipsList.size() ; i++) {
+            chipsList.get(i).setQuantity(purchaseEntity.getEntries().get(chipsList.get(i)));
+        }
+        return chipsList;
     }
 
     public CustomerEntity getCustomerByPurchaseID(long id) {
@@ -43,21 +48,23 @@ public class PurchaseService {
         return purchaseEntity.getCustomerEntity();
     }
 
-   /*
-    public void addProduct(ChipsEntity product) {
-        if (entries.containsKey(product)) {
-            entries.put(product, entries.get(product) + 1);
-        } else {
-            entries.put(product, (long) 1);
-        }
-    }
 
-    public void removeProduct(Chips product) {
-        if (entries.containsKey(product)) {
-            entries.put(product, entries.get(product) - 1);
-            if (entries.get(product) < 1) {
-                entries.remove(product);
+    public void addProduct(List<ChipsEntity> products, CustomerEntity currentCustomer) {
+        PurchaseEntity purchaseEntity = new PurchaseEntity();
+        purchaseEntity.setCustomerEntity(currentCustomer);
+        long sum = 0;
+        for (ChipsEntity product : products) {
+            if (product.getQuantity() > 1) {
+                purchaseEntity.getEntries().put(product, product.getQuantity());
+            } else {
+                purchaseEntity.getEntries().put(product, (long) 1);
             }
+            sum += product.getPrice() * product.getQuantity();
         }
-    } */
+        purchaseEntity.setPurchasePrice(sum);
+        Date date = new Date();
+        purchaseEntity.setDateOfPurchase(date);
+        purchaseRepository.save(purchaseEntity);
+
+    }
 }
