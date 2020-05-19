@@ -25,14 +25,10 @@ public class CheckoutController {
     public String checkOut(Model theModel) {
         String page = "";
         if (customerService.isCustomerLoggedIn()) {
-            if (cartService.getTotalAmountOfItems() > 0) {
                 theModel.addAttribute("cartlist", cartService.getCartList());
                 theModel.addAttribute("totalsum", cartService.getTotalSum());
                 theModel.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
                 page = "checkoutPage";
-            } else {
-                page = "redirect:/chips/list/";
-            }
         } else {
             page = "error";
         }
