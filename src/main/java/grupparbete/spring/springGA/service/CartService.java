@@ -52,6 +52,26 @@ public class CartService {
         }
     }
 
+    public void removeFromCart(ChipsEntity chipsEntity) {
+        if(chipsEntity.getQuantity() > 1) {
+        for (int i = 0; i < cartList.size(); i++) {
+            if (chipsEntity.getId().equals(cartList.get(i).getId())) {
+                cartList.get(i).setQuantity(cartList.get(i).getQuantity() - 1);
+                totalAmountOfItems--;
+                totalSum = totalSum - chipsEntity.getPrice();
+
+                break;
+            }
+        }
+
+        }
+        else if(chipsEntity.getQuantity() == 1) {
+            cartList.remove(chipsEntity);
+            totalAmountOfItems--;
+            totalSum = totalSum - chipsEntity.getPrice();
+        }
+    }
+
     public List<ChipsEntity> getCartList() {
         return cartList;
     }

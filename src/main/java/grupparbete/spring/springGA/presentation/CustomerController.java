@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/customers")
+@RequestMapping("customers")
 public class CustomerController {
 
     private CustomerService customerService;
@@ -40,7 +40,7 @@ public class CustomerController {
         if (customerService.isCustomerLoggedIn()) {
             page = "customerPage";
         } else {
-            page = "error";
+            page = "loginError";
         }
 return page;
     }
