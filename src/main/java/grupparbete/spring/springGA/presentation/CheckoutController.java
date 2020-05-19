@@ -33,6 +33,5 @@ public class CheckoutController {
             page = "error";
         }
         return page;
-
     }
 }
