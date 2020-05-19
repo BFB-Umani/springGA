@@ -50,6 +50,5 @@ public class PurchaseController {
 
         return page;
     }
-
-
+    
 }
