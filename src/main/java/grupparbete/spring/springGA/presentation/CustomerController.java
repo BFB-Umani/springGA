@@ -4,6 +4,7 @@ import grupparbete.spring.springGA.Domain.CustomerEntity;
 import grupparbete.spring.springGA.persistance.CustomerRepository;
 import grupparbete.spring.springGA.request.UserDetailsRequestModel;
 import grupparbete.spring.springGA.request.UserLoginRequestModel;
+import grupparbete.spring.springGA.service.CartService;
 import grupparbete.spring.springGA.service.CustomerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,12 @@ import java.util.Optional;
 public class CustomerController {
 
     private CustomerService customerService;
-
+    private CartService cartService;
 
     @Autowired
-    public CustomerController(CustomerService customerService){
+    public CustomerController(CustomerService customerService, CartService cartService) {
         this.customerService = customerService;
+        this.cartService = cartService;
     }
 
     public List<CustomerEntity> getAllCustomers(){
@@ -57,7 +59,7 @@ public class CustomerController {
     @GetMapping("/logout")
     public String logOut(){
         customerService.setCurrentCustomerEntity(null);
-        //empty shoppingcart
+        cartService.emptyCart();
         return "redirect:/login";
     }
 
