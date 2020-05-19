@@ -19,11 +19,17 @@ public class CheckoutController {
     }
 
     @GetMapping
-    public String checkOut(Model theModel){
+    public String checkOut(Model theModel) {
+        String page = "";
 
-        theModel.addAttribute("cartlist", cartService.getCartList());
-        theModel.addAttribute("totalsum", cartService.getTotalSum());
-        theModel.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
-        return "checkoutPage";
+        if (cartService.getTotalAmountOfItems() > 0) {
+            theModel.addAttribute("cartlist", cartService.getCartList());
+            theModel.addAttribute("totalsum", cartService.getTotalSum());
+            theModel.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
+            page = "checkoutPage";
+        } else {
+            page = "redirect:/chips/list/";
+        }
+        return page;
     }
 }
