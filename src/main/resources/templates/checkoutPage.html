@@ -58,7 +58,11 @@
         </td>
         <td th:text="${chips.getBrand()}"></td>
         <td th:text="${chips.getName()}"></td>
-        <td th:text="${chips.getQuantity()}"></td>
+        <td>
+            <a th:href="@{'/checkout/remove/'+${chips.id}}" class="btn btn-success">-</a>
+            <span th:text="${chips.getQuantity()}"></span>
+            <a  th:href="@{'/checkout/checkoutAdd/'+${chips.id}}" class="btn btn-success">+</a>
+        </td>
         <td th:text="${chips.getPrice()} + ' Kr/st'"></td>
     </tr>
     </tbody>

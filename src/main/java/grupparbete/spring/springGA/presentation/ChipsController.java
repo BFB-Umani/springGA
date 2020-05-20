@@ -81,7 +81,7 @@ public class ChipsController {
             cartService.setSearchWord(searchWord);
             page = "search";
         } else {
-            page = "error";
+            page = "listError";
         }
         return page;
     }

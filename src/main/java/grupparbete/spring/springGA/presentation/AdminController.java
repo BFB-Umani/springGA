@@ -43,7 +43,7 @@ public class AdminController {
             model.addAttribute("customers", customerEntityList);
             page = "adminPage";
         } else {
-            page = "error";
+            page = "loginError";
         }
         return page;
     }
@@ -64,7 +64,7 @@ public class AdminController {
             model.addAttribute("chips", chipsEntityList);
             page = "purchaseInfo";
         } else {
-            page = "error";
+            page = "loginError";
         }
         return page;
     }
@@ -80,7 +80,7 @@ public class AdminController {
             model.addAttribute("chosencustomer",customerEntity);
             page = "purchases";
         } else {
-            page = "error";
+            page = "loginError";
         }
         return page;
     }
