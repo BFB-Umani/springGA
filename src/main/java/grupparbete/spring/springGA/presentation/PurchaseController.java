@@ -38,19 +38,24 @@ public class PurchaseController {
     public String makePurchase(Model theModel) {
         String page = "";
         if (customerService.isCustomerLoggedIn()) {
-            purchaseService.addProduct(cartService.getCartList(), customerService.getCurrentCustomerEntity());
-            theModel.addAttribute("cartlist", cartService.getCartList());
+            if(cartService.getTotalAmountOfItems()>0){
+                purchaseService.addProduct(cartService.getCartList(), customerService.getCurrentCustomerEntity());
+                theModel.addAttribute("cartlist", cartService.getCartList());
 
-            theModel.addAttribute("totalsum", cartService.getTotalSum());
-            theModel.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
-            cartService.emptyCart();
+                theModel.addAttribute("totalsum", cartService.getTotalSum());
+                theModel.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
+                cartService.emptyCart();
 
-            if (customerService.upgradeCustomerToPremium()) {
-                theModel.addAttribute("upgradeToPremium", "Congratulations! You are our premium customer now! You will get 10% discount for all purchases in the future.");
+                if (customerService.upgradeCustomerToPremium()) {
+                    theModel.addAttribute("upgradeToPremium", "Congratulations! You are our premium customer now! You will get 10% discount for all purchases in the future.");
+                }else{
+                    theModel.addAttribute("upgradeToPremium", "");
+                }
+                page = "recieptPage";
             }else{
-                theModel.addAttribute("upgradeToPremium", "");
+                page = "redirect:/checkout";
             }
-            page = "recieptPage";
+
         } else {
             page = "error";
         }

@@ -49,6 +49,9 @@
     </thead>
 
     <tbody>
+    <tr th:if="${cartlist.isEmpty()}">
+        <td colspan="5" class="text-center">Your cart is empty! Please add something to your cart to make a purchase.</td>
+    </tr>
     <tr th:each="chips: ${cartlist}">
 
         <td>
@@ -68,19 +71,14 @@
     </tbody>
     <tfoot class="checkoutTable">
     <tr>
-        <td></td>
-        <td></td>
-        <td><span th:text="'Total price: ' + ${totalsum} + ' Kr'"></span></td>
-        <td></td>
-        <td></td>
+        <td colspan="5"><span th:text="'Total price: ' + ${totalsum} + ' Kr'"></span></td>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
-        <td><a th:href="@{/purchases/reciept}" class="btn btn-success">Confirm order</a></td>
-        <td></td>
-        <td></td>
+
+        <td colspan="5"><a th:href="@{/purchases/reciept}" class="btn btn-success">Confirm order</a></td>
+
     </tr>
+
     </tfoot>
 </table>
 
