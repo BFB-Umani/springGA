@@ -44,6 +44,7 @@ public class ChipsController {
             theModel.addAttribute("allChips", getAllChips());
             theModel.addAttribute("cartlist", cartService.getCartList());
             theModel.addAttribute("totalsum", cartService.getTotalSum());
+            theModel.addAttribute("discountSum",cartService.getDiscountSum());
             theModel.addAttribute("totalAmountOfItems", cartService.getTotalAmountOfItems());
             page = "customerPage";
         } else {

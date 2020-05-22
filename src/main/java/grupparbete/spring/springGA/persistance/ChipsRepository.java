@@ -14,4 +14,5 @@ public interface ChipsRepository extends JpaRepository<ChipsEntity,Long> {
     List<ChipsEntity> findByBrandContainingIgnoreCase(String brand);
     List<ChipsEntity> findByNameContainingIgnoreCase(String name);
 
+
 }

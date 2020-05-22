@@ -1,7 +1,6 @@
 package grupparbete.spring.springGA.service;
 
 import grupparbete.spring.springGA.Domain.ChipsEntity;
-import grupparbete.spring.springGA.Domain.PurchaseEntity;
 import grupparbete.spring.springGA.persistance.ChipsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,18 +12,35 @@ import java.util.Optional;
 public class ChipsService {
 
     private ChipsRepository chipsRepository;
+    private CustomerService customerService;
 
     @Autowired
-    public ChipsService(ChipsRepository chipsRepository) {
+    public ChipsService(ChipsRepository chipsRepository, CustomerService customerService) {
         this.chipsRepository = chipsRepository;
+        this.customerService = customerService;
     }
 
     public List<ChipsEntity> getAllChips() {
-        return chipsRepository.findAll();
+        List<ChipsEntity> chipsEntityList = chipsRepository.findAll();
+
+        if(customerService.getCurrentCustomerEntity().isPremiumCustomer()){
+            for (int i = 0; i <chipsEntityList.size() ; i++) {
+                long discountPrice = (long) (chipsEntityList.get(i).getPrice()*0.9);
+                chipsEntityList.get(i).setPrice(discountPrice);
+            }
+        }
+        return chipsEntityList;
     }
 
     public Optional<ChipsEntity> getAChips(long id) {
-        return chipsRepository.findById(id);
+        Optional<ChipsEntity> chipsEntity = chipsRepository.findById(id);
+        if(customerService.getCurrentCustomerEntity().isPremiumCustomer()){
+            if(chipsEntity.isPresent()){
+                long discountPrice = (long) (chipsEntity.get().getPrice()*0.9);
+                chipsEntity.get().setPrice(discountPrice);
+            }
+        }
+        return chipsEntity;
     }
 
     public void addChips(ChipsEntity chipsEntity) {
@@ -43,5 +59,15 @@ public class ChipsService {
         List<ChipsEntity> resultList2 = chipsRepository.findByNameContainingIgnoreCase(searchWord);
         resultList1.addAll(resultList2);
         return resultList1;
+    }
+
+    public void changePriceToDiscountPriceForPremiumCustomer(){
+        if(customerService.getCurrentCustomerEntity().isPremiumCustomer()){
+            for (int i = 0; i <getAllChips().size() ; i++) {
+                long discountPrice = (long) (getAllChips().get(i).getPrice()*0.9);
+                getAllChips().get(i).setPrice(discountPrice);
+            }
+        }
+
     }
 }

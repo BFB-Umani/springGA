@@ -2,7 +2,6 @@ package grupparbete.spring.springGA.service;
 
 import grupparbete.spring.springGA.Domain.ChipsEntity;
 import grupparbete.spring.springGA.persistance.ChipsRepository;
-import grupparbete.spring.springGA.persistance.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ public class CartService {
 
     private ChipsRepository chipsRepository;
     private CustomerService customerService;
+    private ChipsService chipsService;
     private List<ChipsEntity> cartList = new ArrayList<>();
     private long totalSum = 0;
     private int totalAmountOfItems = 0;
@@ -27,9 +27,10 @@ public class CartService {
         this.searchWord = searchWord;
     }
 
-    public CartService(ChipsRepository chipsRepository,CustomerService customerService) {
+    public CartService(ChipsRepository chipsRepository, CustomerService customerService, ChipsService chipsService) {
         this.chipsRepository = chipsRepository;
         this.customerService = customerService;
+        this.chipsService = chipsService;
     }
 
 
@@ -41,13 +42,13 @@ public class CartService {
             if (chipsEntity.getId().equals(cartList.get(i).getId())) {
                 cartList.get(i).setQuantity(cartList.get(i).getQuantity() + 1);
                 totalAmountOfItems++;
-                totalSum = totalSum+chipsEntity.getPrice();
+                totalSum = totalSum + chipsEntity.getPrice();
                 notInCart = false;
                 break;
             }
         }
 
-        if(notInCart) {
+        if (notInCart) {
             chipsEntity.setQuantity(1);
             cartList.add(chipsEntity);
             totalAmountOfItems++;
@@ -57,7 +58,7 @@ public class CartService {
 
     public void removeFromCart(ChipsEntity chipsEntity) {
         for (int i = 0; i < cartList.size(); i++) {
-            if(cartList.get(i).getQuantity() > 1) {
+            if (cartList.get(i).getQuantity() > 1) {
                 if (chipsEntity.getId().equals(cartList.get(i).getId())) {
                     cartList.get(i).setQuantity(cartList.get(i).getQuantity() - 1);
                     totalAmountOfItems--;
@@ -65,7 +66,7 @@ public class CartService {
 
                     break;
                 }
-            } else if(cartList.get(i).getQuantity() == 1) {
+            } else if (cartList.get(i).getQuantity() == 1) {
                 cartList.remove(cartList.get(i));
                 totalAmountOfItems--;
                 totalSum = totalSum - chipsEntity.getPrice();
@@ -85,14 +86,33 @@ public class CartService {
     }
 
     public Optional<ChipsEntity> findChipsEntity(long id) {
-        return chipsRepository.findById(id);
+        return chipsService.getAChips(id);
     }
 
     public long getTotalSum() {
-        if(customerService.getCurrentCustomerEntity().isPremiumCustomer()){
-        return (long) (totalSum*0.9);
+        if (customerService.getCurrentCustomerEntity().isPremiumCustomer()) {
+            return (long) (totalSum);
         }
         return totalSum;
+    }
+
+    public long getOriginalPriceSum() {
+        long originalPriceSum = 0L;
+        for (int i = 0; i < cartList.size(); i++) {
+            ChipsEntity chipsEntity = cartList.get(i);
+            Optional<ChipsEntity> chipsEntity1 = chipsRepository.findById(chipsEntity.getId());
+            if (chipsEntity1.isPresent()) {
+                if (customerService.getCurrentCustomerEntity().isPremiumCustomer()) {
+                    long originalPrice = (long) (chipsEntity1.get().getPrice()/(0.9));
+                    originalPriceSum += originalPrice*chipsEntity.getQuantity();
+                }
+            }
+        }
+        return originalPriceSum;
+    }
+
+    public long getDiscountSum() {
+        return getOriginalPriceSum() - getTotalSum();
     }
 
     public void setTotalSum(long totalSum) {

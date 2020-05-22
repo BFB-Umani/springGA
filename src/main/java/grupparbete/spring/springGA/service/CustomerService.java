@@ -3,6 +3,7 @@ package grupparbete.spring.springGA.service;
 import grupparbete.spring.springGA.Domain.ChipsEntity;
 import grupparbete.spring.springGA.Domain.CustomerEntity;
 import grupparbete.spring.springGA.Domain.PurchaseEntity;
+import grupparbete.spring.springGA.persistance.ChipsRepository;
 import grupparbete.spring.springGA.persistance.CustomerRepository;
 import grupparbete.spring.springGA.request.UserDetailsRequestModel;
 import grupparbete.spring.springGA.request.UserLoginRequestModel;
@@ -10,9 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -20,9 +19,13 @@ public class CustomerService {
     private CustomerRepository customerRepository;
     private CustomerEntity currentCustomerEntity;
 
+
+
+
     @Autowired
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
+
     }
 
     public List<CustomerEntity> getAllCustomers() {

@@ -106,6 +106,7 @@
                 <td></td>
                 <td><a th:href="@{/checkout}" class="btn btn-success">Checkout</a></td>
                 <td><span th:text="'Total price: ' + ${totalsum} + ' Kr'"></span></td>
+                <td><span class="discount" th:text="'Your discount: ' + ${discountSum} + ' Kr'"></span></td>
             </tr>
             </tfoot>
         </table>
