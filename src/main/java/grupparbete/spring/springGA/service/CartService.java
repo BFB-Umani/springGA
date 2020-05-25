@@ -112,7 +112,11 @@ public class CartService {
     }
 
     public long getDiscountSum() {
+        if (customerService.getCurrentCustomerEntity().isPremiumCustomer()){
+
         return getOriginalPriceSum() - getTotalSum();
+        }
+        return 0L;
     }
 
     public void setTotalSum(long totalSum) {
