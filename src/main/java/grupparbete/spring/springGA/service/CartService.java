@@ -103,7 +103,7 @@ public class CartService {
             Optional<ChipsEntity> chipsEntity1 = chipsRepository.findById(chipsEntity.getId());
             if (chipsEntity1.isPresent()) {
                 if (customerService.getCurrentCustomerEntity().isPremiumCustomer()) {
-                    long originalPrice = (long) (chipsEntity1.get().getPrice()/(0.9));
+                    long originalPrice = (long) Math.ceil((chipsEntity1.get().getPrice()/(0.9)));
                     originalPriceSum += originalPrice*chipsEntity.getQuantity();
                 }
             }
